@@ -1,34 +1,17 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System;
 
 public class RuntimeEnemyStats : MonoBehaviour
 {
     private EnemyDataSO baseData;
-    private int currentStage;
 
-    private float defenseMultiplier = 1.0f;
-    private float damageMultiplier = 1.0f;
+    public float MaxHealth { get; private set; }
+    public float MoveSpeed { get; private set; }
+    public float AttackDamage { get; private set; }
 
-    public void Initialize(EnemyDataSO data, int stage)
+    public void SetupStats(EnemyDataSO data, float stageMultiplier)
     {
         baseData = data;
-        currentStage = stage;
+        MaxHealth = data.baseHaealth * stageMultiplier;
+        AttackDamage = data.baseDamage * stageMultiplier;
     }
-
-    public float GetMaxHealth()
-    {
-        float stageScale = (float)(1f + (currentStage - 1) * 0.15);
-        return baseData.baseHaealth * stageScale;
-    }
-    public float GetDamageOutput()
-    {
-        float stageScale = (float)(1f + (currentStage - 1) * 0.15);
-        return baseData.baseDamage * stageScale;
-    }
-    public float GetIncomingDamageMultiplier()
-    {
-        return defenseMultiplier;
-    }
-
 }

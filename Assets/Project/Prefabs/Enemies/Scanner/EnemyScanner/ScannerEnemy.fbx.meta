@@ -7,16 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Scanner_Lights
-    second: {fileID: 2100000, guid: 06d4d29181ed2ad42b1cb6146fca541f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Scanner_base
-    second: {fileID: 2100000, guid: 0c09cf555b2750e4e859116f8e7303ed, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: scanner_radar
     second: {fileID: 2100000, guid: dd522dab66efa034592bd8bd293f1aed, type: 2}
   materials:

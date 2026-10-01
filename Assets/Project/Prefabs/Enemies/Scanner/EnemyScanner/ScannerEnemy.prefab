@@ -22,19 +22,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000009415697
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00000009415696
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071067
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScannerEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59,6 +63,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5360559147063191219}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1301630658198751732}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8643940822745106837}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 218186549311524368}
   m_SourcePrefab: {fileID: 100100000, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
 --- !u!1 &4211103081718075998 stripped
 GameObject:
@@ -74,8 +87,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4211103081718075998}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+  m_Controller: {fileID: 22100000, guid: 92801782e87244b49b128aed0bc257e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -87,3 +100,50 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &-1301630658198751732
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4211103081718075998}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-8643940822745106837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4211103081718075998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31b3b5b35f47e24199794e86dca4383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyControllerBase
+  enemyData: {fileID: 0}
+--- !u!114 &218186549311524368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4211103081718075998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdf588a242d5e64f93d520bec7d1b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RuntimeEnemyStats

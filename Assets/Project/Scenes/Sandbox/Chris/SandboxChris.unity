@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 824818939}
   - component: {fileID: 824818938}
   - component: {fileID: 824818937}
+  - component: {fileID: 824818940}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -308,6 +309,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &824818940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824818936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1044076776
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +419,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 23e525dcc457606489a9fad43d45e08e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -453,7 +498,7 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
---- !u!1001 &1937280670
+--- !u!1001 &1513143695
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -463,19 +508,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.364325
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000003038309
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.369986
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -483,15 +528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -499,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3547437230063323364, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4211103081718075998, guid: 1b476bef2e7fac84fa5c5518528842a2, type: 3}
       propertyPath: m_Name
@@ -517,4 +562,4 @@ SceneRoots:
   - {fileID: 824818939}
   - {fileID: 785012120}
   - {fileID: 1044076780}
-  - {fileID: 1937280670}
+  - {fileID: 1513143695}
