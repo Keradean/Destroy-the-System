@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4289308067542860465
+--- !u!1 &4202005733305121246
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5700328234521752389}
-  - component: {fileID: 8012889536204381769}
-  - component: {fileID: 3455152195826557565}
-  - component: {fileID: 6801315517518084030}
-  - component: {fileID: 1519127602604145300}
-  - component: {fileID: 5049312020636890236}
-  - component: {fileID: -8663218706009920352}
+  - component: {fileID: 2733709526314992319}
+  - component: {fileID: 3267979671478513358}
+  - component: {fileID: 9136485712677104261}
+  - component: {fileID: 5421073792747145363}
+  - component: {fileID: 5889123813285842584}
+  - component: {fileID: 1635369610924746410}
+  - component: {fileID: 2048353500969626931}
   m_Layer: 8
-  m_Name: EnemyScanner
+  m_Name: EnemyTracer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5700328234521752389
+--- !u!4 &2733709526314992319
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.59797, y: -0, z: -12.09759}
+  m_LocalPosition: {x: -5.81073, y: 0, z: -1.64586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 890833173348561719}
+  - {fileID: 4980721767138925400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!195 &8012889536204381769
+--- !u!195 &3267979671478513358
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 0
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -60,14 +60,14 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!95 &3455152195826557565
+--- !u!95 &9136485712677104261
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
   m_Controller: {fileID: 22100000, guid: 92801782e87244b49b128aed0bc257e9, type: 2}
@@ -82,49 +82,49 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6801315517518084030
+--- !u!114 &5421073792747145363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fdf588a242d5e64f93d520bec7d1b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RuntimeEnemyStats
---- !u!114 &1519127602604145300
+--- !u!114 &5889123813285842584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cfb297f6bb0a0d4b95a5fa33d794405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
---- !u!114 &5049312020636890236
+--- !u!114 &1635369610924746410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a31b3b5b35f47e24199794e86dca4383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControllerBase
---- !u!136 &-8663218706009920352
+--- !u!136 &2048353500969626931
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289308067542860465}
+  m_GameObject: {fileID: 4202005733305121246}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,13 +141,13 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!1001 &852967518567814364
+--- !u!1001 &4797931690047732915
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5700328234521752389}
+    m_TransformParent: {fileID: 2733709526314992319}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5b9d1d34ed0940445bfabb9d9a003a70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -222,8 +222,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9d1d34ed0940445bfabb9d9a003a70, type: 3}
---- !u!4 &890833173348561719 stripped
+--- !u!4 &4980721767138925400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b9d1d34ed0940445bfabb9d9a003a70, type: 3}
-  m_PrefabInstance: {fileID: 852967518567814364}
+  m_PrefabInstance: {fileID: 4797931690047732915}
   m_PrefabAsset: {fileID: 0}
