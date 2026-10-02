@@ -31,6 +31,7 @@ namespace Project.Scripts.Dennis.Player
                 if(!_input.GetDirection(out Direction direction)) return;
                 Node nextNode = _currentNode.GetNeighbor(direction);
                 if(nextNode == null) return;
+                _currentNode.OnPlayerExit();
                 _targetNode = nextNode;
                 transform.LookAt(nextNode.transform.position);
             }  
