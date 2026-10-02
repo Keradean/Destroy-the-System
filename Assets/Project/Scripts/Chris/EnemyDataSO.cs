@@ -8,6 +8,7 @@ public enum EnemyType
     Administrator
 }
 
+[CreateAssetMenu(menuName = "Entities/EnemyDataSO")]
 public class EnemyDataSO : ScriptableObject
 {
     [Header("Identity")]
@@ -16,14 +17,7 @@ public class EnemyDataSO : ScriptableObject
     public GameObject prefab;
 
     [Header("Base Stats")]
-    public float baseHaealth;
+    public float baseHealth;
     public float baseDamage;
-    public float movespeed;
     public float attackRange;
-    public float aggroRadius;
-
-    [Header("Special")]
-    public float damageReductionPercent = 0;
-    public float optimalRangeDistance;
-    public float maximumRangeDistance;
 }

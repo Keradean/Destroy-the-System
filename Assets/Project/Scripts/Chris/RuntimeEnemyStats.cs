@@ -11,7 +11,7 @@ public class RuntimeEnemyStats : MonoBehaviour
     public void SetupStats(EnemyDataSO data, float stageMultiplier)
     {
         baseData = data;
-        MaxHealth = data.baseHaealth * stageMultiplier;
+        MaxHealth = data.baseHealth * stageMultiplier;
         AttackDamage = data.baseDamage * stageMultiplier;
     }
 }
