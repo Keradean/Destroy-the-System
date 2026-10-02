@@ -35,6 +35,16 @@ namespace Project.Scripts.Dennis.Player
             }  
             else
             {
+                if (_input.GetDirection(out Direction direction))
+                {
+                    if (_targetNode.GetNeighbor(direction) == _currentNode)
+                    {
+                        Node oldTarget = _targetNode;
+                        _targetNode = _currentNode;
+                        _currentNode = oldTarget;
+                        transform.LookAt(_targetNode.transform.position);
+                    }
+                }
                 transform.position = Vector3.MoveTowards(transform.position, _targetNode.transform.position, _moveSpeed * Time.deltaTime);
                 if (transform.position != _targetNode.transform.position) return;
                 _currentNode = _targetNode;

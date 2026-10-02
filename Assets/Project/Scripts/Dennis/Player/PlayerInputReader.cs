@@ -13,12 +13,10 @@ namespace Project.Scripts.Dennis.Player
         {
             moveAction.action.Enable();
         }
-
         private void OnDisable()
         {
             moveAction.action.Disable();
         }
-
         public bool GetDirection(out Direction direction)
         {
             direction = Direction.Up; 
