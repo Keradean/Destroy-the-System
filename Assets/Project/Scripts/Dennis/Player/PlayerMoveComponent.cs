@@ -10,6 +10,7 @@ namespace Project.Scripts.Dennis.Player
         [SerializeField] private float _moveSpeed = 5f;
         
         PlayerInputReader _input;
+        public bool IsMoving => _targetNode != null;
         private Node _targetNode;
         ///////////////////////////////////////////////////////////
         void Awake()
