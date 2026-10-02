@@ -27,6 +27,12 @@ namespace Project.Scripts.Dennis.Nodes
         {
             Debug.Log("Player entered node: " + gameObject.name);
         }
+        // virtual method that can be overridden by derived classes to handle player exiting the node
+        public virtual void OnPlayerExit()
+        {
+            Debug.Log("Player exited node: " + gameObject.name);
+        }
+
         // Draws a half line from the current node to the neighbor node in the editor for visualization
         private void OnDrawGizmos()
         {

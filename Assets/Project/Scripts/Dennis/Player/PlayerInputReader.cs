@@ -13,15 +13,14 @@ namespace Project.Scripts.Dennis.Player
         {
             moveAction.action.Enable();
         }
-
         private void OnDisable()
         {
             moveAction.action.Disable();
         }
-
         public bool GetDirection(out Direction direction)
         {
-            direction = Direction.Up; // Default value
+            direction = Direction.Up; 
+            if(!moveAction.action.WasPressedThisFrame()) return false;
             Vector2 input = moveAction.action.ReadValue<Vector2>();
             if(input == Vector2.zero)
             {

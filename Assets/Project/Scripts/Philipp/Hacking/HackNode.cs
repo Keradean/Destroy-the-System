@@ -9,7 +9,7 @@ namespace Project.Scripts.Philipp.Hacking
         // [SerializeField] private GameManager gameManager;    //TODO remove comment as soon as GameManager is implemented
         [Header("Settings")]
         [SerializeField] private float hackingTime = 5f;
-        [SerializeField] private string playerTag = "Player";
+        //[SerializeField] private string playerTag = "Player"; wird nicht mehr benötigt
 
         [Header("Hacking State")]
         [SerializeField] private float progress = 0f;
@@ -37,8 +37,12 @@ namespace Project.Scripts.Philipp.Hacking
                 Debug.Log("[HackNode] Hacking Completed!");
             }
         }
-
-        private void OnTriggerEnter(Collider other)
+        /// <summary>
+        ///  Das brauchen wir nicht mehr kann gelöcht werden, da wir die OnPlayerEnter und OnPlayerExit Methoden
+        /// überschreiben und nicht mehr über Trigger arbeiten.
+        /// </summary>
+        /*
+         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(playerTag))
             {
@@ -53,6 +57,7 @@ namespace Project.Scripts.Philipp.Hacking
                 OnPlayerExit();
             }
         }
+        */
         #endregion
 
         #region Methods
@@ -67,7 +72,7 @@ namespace Project.Scripts.Philipp.Hacking
             }
         }
 
-        public void OnPlayerExit()
+        public override void OnPlayerExit() // Geändert von Dennis zu Override um einen weg anstatt zwei zu haben.
         {
             isPlayerInside = false;
             Debug.Log("[HackNode] Hacking interrupted!");

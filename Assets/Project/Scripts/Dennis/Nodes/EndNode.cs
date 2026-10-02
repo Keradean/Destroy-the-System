@@ -15,10 +15,13 @@ namespace Project.Scripts.Dennis.Nodes
             if (!isOpen)
             {
                 Debug.Log("Du kommst hier ned rein!!!: " + gameObject.name);
-                // Add logic for when the player enters the end node and it is open
+                // TODO: Add logic for when the player enters the end node and it is open
             }
-            // TODO: GameManager.Win() aufrufen, sobald dieser halt existiert
-            Debug.Log("Juhu Ich habe Gewonnen, Ihr Pfeifen: " + gameObject.name);
+            else
+            {
+                // TODO: GameManager.Win() aufrufen, sobald dieser halt existiert
+                Debug.Log("Juhu Ich habe Gewonnen, Ihr Pfeifen: " + gameObject.name);
+            }
         }
     }
 }
