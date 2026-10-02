@@ -7,5 +7,13 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AOC_Tracer
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: f3f3c5612b4a78d448e7f7585cc93f2a, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 18d141e2e7da21f40ba4b359bdce744e, type: 2}
+    m_OverrideClip: {fileID: 4291780451427687083, guid: 32b30072c075b4342b2ef1738b24e65e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c846e0bff45b827428150b58759f7162, type: 2}
+    m_OverrideClip: {fileID: 8606181001939486271, guid: 32b30072c075b4342b2ef1738b24e65e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c5161584d96a434419bfdf917300e164, type: 2}
+    m_OverrideClip: {fileID: -5187953657950640998, guid: 32b30072c075b4342b2ef1738b24e65e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: e95742cba516e9a40960478045fe8d9f, type: 2}
+    m_OverrideClip: {fileID: -5187953657950640998, guid: 32b30072c075b4342b2ef1738b24e65e, type: 3}
