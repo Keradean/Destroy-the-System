@@ -1,22 +1,46 @@
 using Project.Scripts.Dennis.Nodes;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 namespace Project.Scripts.Dennis.Player
 {
     public class PlayerMoveComponent : MonoBehaviour
     {
-        [SerializeField] private Node _currentNode;
+        [SerializeField] Node _currentNode;
+        [SerializeField] private float _moveSpeed = 5f;
+        
         PlayerInputReader _input;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private Node _targetNode;
+        ///////////////////////////////////////////////////////////
         void Awake()
         {
+            _currentNode.OnPlayerEnter();
             _input = GetComponent<PlayerInputReader>();
         }
-
         // Update is called once per frame
         void Update()
         {
+            Move();
+        }
+
+        private void Move()
+        {
+            if (_targetNode == null)
+            {
+                if(!_input.GetDirection(out Direction direction)) return;
+                Node nextNode = _currentNode.GetNeighbor(direction);
+                if(nextNode == null) return;
+                _targetNode = nextNode;
+                transform.LookAt(nextNode.transform.position);
+            }  
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _targetNode.transform.position, _moveSpeed * Time.deltaTime);
+                if (transform.position != _targetNode.transform.position) return;
+                _currentNode = _targetNode;
+                _targetNode = null;
+                _currentNode.OnPlayerEnter();
+            }
         }
     }
 }
