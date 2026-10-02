@@ -25,7 +25,6 @@ namespace Project.Scripts.Dennis.Network
                 }
             }
         }
-
         private void BuildLink(Node from, Node to)
         {
             Vector3 middle = Vector3.Lerp(from.transform.position, to.transform.position, 0.5f);
