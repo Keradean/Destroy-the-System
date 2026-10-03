@@ -21,5 +21,5 @@ MonoBehaviour:
   meleeRange: 0
   rangedRange: 12
   hasSpecial: 1
-  specialRange: 40
+  specialRange: 80
   specialCooldown: 20

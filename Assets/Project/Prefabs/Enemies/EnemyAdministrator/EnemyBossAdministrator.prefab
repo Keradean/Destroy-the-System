@@ -85,9 +85,9 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3
   m_Acceleration: 12
-  avoidancePriority: 50
+  avoidancePriority: 10
   m_AngularSpeed: 180
-  m_StoppingDistance: 0
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -105,7 +105,7 @@ Animator:
   m_GameObject: {fileID: 2921150542361447948}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e0b620bd88b812446a7ed99887e1647b, type: 3}
-  m_Controller: {fileID: 22100000, guid: 92801782e87244b49b128aed0bc257e9, type: 2}
+  m_Controller: {fileID: 22100000, guid: 75e3321f2091b4f47963eef1ccd5e6cc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

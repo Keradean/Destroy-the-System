@@ -60,26 +60,26 @@ public class EnemyControllerBase : MonoBehaviour
     public void InitFromSpawn(EnemyDataSO data, float stageMultiplier, Vector3 validPosition, PoolManager poolManager)
     {
         PoolManager = poolManager;
+        if (Target == null) FindPlayer();
         Stats.SetupStats(data, stageMultiplier);
         Health.Initialize(Stats.MaxHealth);
+        if (Agent != null)
+        {
+            Agent.enabled = true;
+            Agent.Warp(validPosition);
+            Agent.isStopped = false;
+        }
         if (Anim != null)
         {
             Anim.Rebind();
             BindBehaviours();
             Anim.Update(0f);
         }
-        if (Target == null) FindPlayer();
-        if (Agent != null || Agent.enabled == false)
-        {
-            Agent.enabled = true;
-            Agent.Warp(validPosition);
-            Agent.isStopped = false;
-        }
-        BindBehaviours();
     }
     private void Update()
     {
         if (Target == null || Health.IsDead || Stats == null) return;
+        if (Target == null) FindPlayer(); // just in case
         float distance = Vector3.Distance(transform.position, Target.position);
         Anim.SetFloat("DistanceToTarget", distance);
         Anim.SetBool("InMeleeRange", distance <= Stats.MeleeRange);
@@ -122,12 +122,14 @@ public class EnemyControllerBase : MonoBehaviour
         nextSpecialTime = Time.time + Stats.SpecialCooldown;
     }
     #endregion
-    #region Animation Events
-    // ====================================================================================
-    // ANIMATION EVENT RELAYS (Unity Engine Calls -> SMB Pipeline)
-    // All Unity Animation Events defined in the FBX files call these methods directly.
-    // They route keyframes straight down to all active StateMachineBehaviours (EnemySMBase).
-    // ====================================================================================
+
+
+    #region Animation Events Obviously this entire region was written by AI. I think this is an appropriate use case for that shit
+    /// <summary>
+    /// ANIMATION EVENT RELAYS (Unity Engine Calls -> SMB Pipeline)
+    /// All Unity Animation Events defined in the FBX files call these methods directly.
+    /// They route keyframes straight down to all active StateMachineBehaviours (EnemySMBase).
+    /// </summary>
 
     // --- SPAWN & DEATH EVENTS ---
     public void AE_OnSpawnStartFrame() => RelayAnimationEvent("AE_OnSpawnStartFrame");
@@ -162,10 +164,6 @@ public class EnemyControllerBase : MonoBehaviour
     // --- PROJECTILE & IMPACT EVENTS ---
     public void AE_OnImpactStartFrame() => RelayAnimationEvent("AE_OnImpactStartFrame");
     public void AE_OnImpactEndFrame() => RelayAnimationEvent("AE_OnImpactEndFrame");
-
-    // --- PLAYER EXIT EVENTS (Forward compatibility) ---
-    public void AE_OnExitStartFrame() => RelayAnimationEvent("AE_OnExitStartFrame");
-    public void AE_OnExitEndFrame() => RelayAnimationEvent("AE_OnExitEndFrame");
 
     /// <summary>
     /// Central Relay mechanism: Distributes event triggers to all SMBs on this Animator.
