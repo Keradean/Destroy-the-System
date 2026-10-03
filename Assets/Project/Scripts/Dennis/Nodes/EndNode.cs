@@ -5,23 +5,22 @@ namespace Project.Scripts.Dennis.Nodes
     public class EndNode : Node
     {
         [SerializeField] private bool isOpen = false;
+        [ContextMenu("Test: Öffnen")]
         public void Open()
         {
             isOpen = true;
         }
 
+        // Solange der Ausgang zu ist, kommt der Player gar nicht erst hin
+        public override bool CanEnter()
+        {
+            return isOpen;
+        }
+
         public override void OnPlayerEnter()
         {
-            if (!isOpen)
-            {
-                Debug.Log("Du kommst hier ned rein!!!: " + gameObject.name);
-                // TODO: Add logic for when the player enters the end node and it is open
-            }
-            else
-            {
-                // TODO: GameManager.Win() aufrufen, sobald dieser halt existiert
-                Debug.Log("Juhu Ich habe Gewonnen, Ihr Pfeifen: " + gameObject.name);
-            }
+            // TODO: GameManager.Win() aufrufen, sobald dieser halt existiert
+            Debug.Log("Juhu Ich habe Gewonnen, Ihr Pfeifen: " + gameObject.name);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Project.Scripts.Dennis.Player
                 if(!_input.GetDirection(out Direction direction)) return;
                 Node nextNode = _currentNode.GetNeighbor(direction);
                 if(nextNode == null) return;
+                if(!nextNode.CanEnter()) return;   // gesperrter Node, stehen bleiben
                 _currentNode.OnPlayerExit();
                 _targetNode = nextNode;
                 transform.LookAt(nextNode.transform.position);
