@@ -13,18 +13,18 @@ public class ExpBarUI : MonoBehaviour
     [SerializeField] private float expToNextLevel = 100f;
 
     [Header("UI Settings")]
-    [SerializeField] private float fullWidth = 408.6f;
+    [SerializeField] private float emptyPosX = -1715f;
+    [SerializeField] private float fullPosX = -92f;
 
     private void Start()
     {
         SetExperience(currentLevel, currentExp, expToNextLevel);
     }
 
-    // Wird vom Gameplay-Code aufgerufen, wenn sich EXP ändert.
-    // Beispiel: expBarUI.SetExperience(5, 35f, 100f);
-    // level = aktuelles Spielerlevel
-    // current = aktuelle EXP
-    // required = benötigte EXP für das nächste Level
+    // Beispiel: expBar.SetExperience(5, 35f, 100f);
+    // level = aktuelles Spielerlevel - 5
+    // current = aktuelle EXP - 35
+    // required = benötigte EXP für das nächste Level - 100
     
     public void SetExperience(int level, float current, float required)
     {
@@ -38,7 +38,10 @@ public class ExpBarUI : MonoBehaviour
     private void UpdateExpBar()
     {
         float expPercent = currentExp / expToNextLevel;
-        expFill.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, fullWidth * expPercent);
+        float newPosX = Mathf.Lerp(emptyPosX, fullPosX, expPercent);
+        Vector2 position = expFill.anchoredPosition;
+        position.x = newPosX;
+        expFill.anchoredPosition = position;
 
         if (levelValue)
         {
