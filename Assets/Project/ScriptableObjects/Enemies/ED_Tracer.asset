@@ -15,6 +15,11 @@ MonoBehaviour:
   enemyName: Tracer
   type: 1
   prefab: {fileID: 4202005733305121246, guid: 7eb8fdd912a386c4186cff416f79f213, type: 3}
+  xp: 10
   baseHealth: 10
   baseDamage: 1
-  attackRange: 8
+  meleeRange: 0
+  rangedRange: 8
+  hasSpecial: 0
+  specialRange: 0
+  specialCooldown: 0
