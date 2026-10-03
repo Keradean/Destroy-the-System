@@ -32,7 +32,7 @@ public class PoolManager : MonoBehaviour
             }
         }
     }
-    private IObjectPool<GameObject> GetOrCreatePool(GameObject prefab, int defaultCapacity = 10, int maxSize = 100)
+    private IObjectPool<GameObject> GetOrCreatePool(GameObject prefab, int defaultCapacity = 10, int maxSize = 1000)
     {
         if (poolDictionary.TryGetValue(prefab, out var existingPool))
             return existingPool;
