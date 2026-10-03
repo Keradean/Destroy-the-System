@@ -198,7 +198,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6874339913411409585, guid: 8553a00c0474c71499cba37c0742c892, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1886193849}
   m_SourcePrefab: {fileID: 100100000, guid: 8553a00c0474c71499cba37c0742c892, type: 3}
 --- !u!1001 &222676755
 PrefabInstance:
@@ -437,6 +440,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f99a8361aed2190b21f2fadb2f4ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Nodes.BaseNode
+--- !u!1 &751568639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874339913411409585, guid: 8553a00c0474c71499cba37c0742c892, type: 3}
+  m_PrefabInstance: {fileID: 122576889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756421719
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +490,8 @@ GameObject:
   - component: {fileID: 1043527608}
   - component: {fileID: 1043527610}
   - component: {fileID: 1043527611}
+  - component: {fileID: 1043527613}
+  - component: {fileID: 1043527612}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -557,10 +567,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerAttack
   _attackInterval: 1
-  range: 5
+  _range: 5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  _maxAttackDuration: 3
+  _projectilePrefab: {fileID: 7499574660123265241, guid: f4efd7abd7fbfb9429f19e2e9d0ed43b, type: 3}
+  _spawnOffset: {x: 0, y: 0.5, z: 0.5}
+--- !u!114 &1043527612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043527606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22282ca5a17706fa5a257a16fdf82b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerSetup
+  _data: {fileID: 11400000, guid: ca07e698ee2553f7ba567ce60c60d2e9, type: 2}
+--- !u!114 &1043527613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043527606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfb297f6bb0a0d4b95a5fa33d794405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
 --- !u!114 &1278160195 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8877212017088737207, guid: 235a0a2c440d92558a9734287a5eca41, type: 3}
@@ -759,6 +797,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6065608821879696395, guid: 8553a00c0474c71499cba37c0742c892, type: 3}
   m_PrefabInstance: {fileID: 122576889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1886193849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751568639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11bad7b74144a6894c2599d7361d722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerAnimationEvents
 --- !u!1 &1940863887
 GameObject:
   m_ObjectHideFlags: 0

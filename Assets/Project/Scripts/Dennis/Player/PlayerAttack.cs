@@ -6,6 +6,7 @@ namespace Project.Scripts.Dennis.Player
     public class PlayerAttack : MonoBehaviour
     {
         private static readonly int AttackHash = Animator.StringToHash("Attack");
+        private static readonly int AttackStateHash = Animator.StringToHash("Attack");
 
         [Header("Angriff")]
         [SerializeField] private float _attackInterval = 0.5f;      // Pause zwischen zwei Angriffen
@@ -21,6 +22,7 @@ namespace Project.Scripts.Dennis.Player
         private Animator _animator;
         private Collider _target;
         private bool _isAttacking;
+        private bool _enteredAttackState;
         private float _timer;
 
         private void Awake()
@@ -34,7 +36,8 @@ namespace Project.Scripts.Dennis.Player
 
             if (_isAttacking)
             {
-                if (_timer >= _maxAttackDuration) OnAttackFinished();
+                CheckAttackStateLeft();
+                if (_isAttacking && _timer >= _maxAttackDuration) OnAttackFinished();
                 return;
             }
 
@@ -70,8 +73,19 @@ namespace Project.Scripts.Dennis.Player
         public void OnAttackFinished()
         {
             _isAttacking = false;
+            _enteredAttackState = false;
             _target = null;
             _timer = 0f;
+        }
+
+        // Ersatz für AE_OnAttackEndFrame: Angriff endet, sobald der Animator den Attack-State verlassen hat
+        private void CheckAttackStateLeft()
+        {
+            bool inAttack = _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AttackStateHash
+                || (_animator.IsInTransition(0) && _animator.GetNextAnimatorStateInfo(0).shortNameHash == AttackStateHash);
+
+            if (inAttack) _enteredAttackState = true;
+            else if (_enteredAttackState) OnAttackFinished();
         }
 
         private Collider FindNearestEnemy()

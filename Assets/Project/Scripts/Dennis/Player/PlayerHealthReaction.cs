@@ -8,6 +8,7 @@ namespace Project.Scripts.Dennis.Player
     {
         private static readonly int DamageHash = Animator.StringToHash("Damage");
         private static readonly int DieHash = Animator.StringToHash("Die");
+        private static readonly int DieStateHash = Animator.StringToHash("Die");
 
         private HealthComponent _health;
         private Animator _animator;
@@ -56,6 +57,13 @@ namespace Project.Scripts.Dennis.Player
             // Steuerung und Angriff sofort sperren
             _move.enabled = false;
             _attack.enabled = false;
+
+            // Ohne Die-State im Animator kommt AE_OnDeathEndFrame nie, dann direkt weiter
+            if (!_animator.HasState(0, DieStateHash))
+            {
+                OnDeathAnimationFinished();
+                return;
+            }
             _animator.SetTrigger(DieHash);
         }
 
