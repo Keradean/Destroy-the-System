@@ -7,10 +7,12 @@ namespace Project.Scripts.Dennis.Player
     public class PlayerAnimationEvents : MonoBehaviour
     {
         private PlayerAttack _attack;
-
+        private PlayerHealthReaction _healthReaction;
+        
         private void Awake()
         {
             _attack = GetComponentInParent<PlayerAttack>();
+            _healthReaction = GetComponentInParent<PlayerHealthReaction>();
         }
 
         // Attack
@@ -24,7 +26,7 @@ namespace Project.Scripts.Dennis.Player
 
         // Death
         public void AE_OnDeathStartFrame() { }    // TODO: Steuerung aus
-        public void AE_OnDeathEndFrame() { }      // TODO: Game Over
+        public void AE_OnDeathEndFrame() { _healthReaction.OnDeathAnimationFinished(); }      // TODO: Game Over
 
         // Spawn
         public void AE_OnSpawnStartFrame() { }

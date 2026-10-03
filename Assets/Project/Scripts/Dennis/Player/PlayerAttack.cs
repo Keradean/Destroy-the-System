@@ -54,7 +54,7 @@ namespace Project.Scripts.Dennis.Player
         // Wird über AE_OnShootFrame aufgerufen
         public void Shoot()
         {
-            Debug.Log("SHOOT aufgerufen");   // TODO: nach dem Testen entfernen
+            if (!enabled) return;   // nach dem Tod nicht mehr schießen
 
             // Ziel könnte inzwischen tot oder weg sein, dann neu suchen
             if (!IsValidTarget(_target)) _target = FindNearestEnemy();
