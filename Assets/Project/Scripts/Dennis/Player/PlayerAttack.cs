@@ -50,7 +50,6 @@ namespace Project.Scripts.Dennis.Player
             _isAttacking = true;
             _timer = 0f;
 
-            Debug.Log("ANGRIFF startet auf " + nearest.name);   // TODO: nach dem Testen entfernen
             _animator.SetTrigger(AttackHash);
         }
 
