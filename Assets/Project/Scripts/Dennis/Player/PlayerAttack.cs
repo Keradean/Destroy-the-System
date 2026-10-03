@@ -7,6 +7,7 @@ namespace Project.Scripts.Dennis.Player
     {
         private static readonly int AttackHash = Animator.StringToHash("Attack");
         private static readonly int AttackStateHash = Animator.StringToHash("Attack");
+        private static readonly int AttackSpeedHash = Animator.StringToHash("AttackSpeed");
 
         [Header("Angriff")]
         [SerializeField] private LayerMask _enemyLayer;
@@ -28,6 +29,11 @@ namespace Project.Scripts.Dennis.Player
         {
             _animator = GetComponentInChildren<Animator>();
             _data = GetComponent<PlayerSetup>().Data;
+        }
+
+        private void Start()
+        {
+            _animator.SetFloat(AttackSpeedHash, _data.attackSpeed);
         }
 
         private void Update()

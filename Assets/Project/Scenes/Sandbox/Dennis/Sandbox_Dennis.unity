@@ -264,6 +264,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45ac48d84143f24408522a06ce96c199, type: 3}
+--- !u!1 &325852674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325852676}
+  - component: {fileID: 325852675}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &325852675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325852674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ab31665edc5a2dd8814e03ffb3477e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
+  _alarmPerSecond: 1
+  _maxAlarm: 15
+  _hacksForCore: 3
+  _endNode: {fileID: 1950624589}
+--- !u!4 &325852676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325852674}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.45958, y: 0, z: 3.5951}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326458967
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerMoveComponent
   _currentNode: {fileID: 2088619097}
-  _moveSpeed: 6.46
 --- !u!114 &1043527609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,8 +613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c7879998094674b8e634070367fcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerAttack
-  _attackInterval: 1
-  _range: 5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1037,6 +1082,10 @@ PrefabInstance:
       propertyPath: right
       value: 
       objectReference: {fileID: 1278160195}
+    - target: {fileID: 8976944168961912938, guid: 425d226e9f4c7e86692ed0d98967329a, type: 3}
+      propertyPath: isOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1256,3 +1305,4 @@ SceneRoots:
   - {fileID: 378456609}
   - {fileID: 222676755}
   - {fileID: 1940863891}
+  - {fileID: 325852676}
