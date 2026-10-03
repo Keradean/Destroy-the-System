@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Project.Scripts.Dennis.Nodes
 {
-    public class EndNode : Node
+    // Gesperrt, bis genug Nodes gehackt sind. Beim Betreten kommt der Boss.
+    public class CoreNode : Node
     {
-        [SerializeField] private bool isOpen = false;
         [SerializeField] private GameManager _gameManager;
 
         private void Awake()
@@ -13,22 +13,16 @@ namespace Project.Scripts.Dennis.Nodes
             // Feld leer gelassen, dann in der Szene suchen
             if (_gameManager == null) _gameManager = FindAnyObjectByType<GameManager>();
         }
-        [ContextMenu("Test: Öffnen")]
-        public void Open()
-        {
-            isOpen = true;
-        }
 
-        // Solange der Ausgang zu ist, kommt der Player gar nicht erst hin
         public override bool CanEnter()
         {
-            return isOpen;
+            return _gameManager != null && _gameManager.IsCoreUnlocked;
         }
 
         public override void OnPlayerEnter()
         {
-            // TODO: später erst Exit-Animation, Win dann bei AE_OnExitEndFrame
-            _gameManager.Win();
+            base.OnPlayerEnter();
+            _gameManager.CoreReached();
         }
     }
 }

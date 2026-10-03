@@ -1,25 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(RawImage))]
-public class WaveScrollUI : MonoBehaviour
+namespace Project.Scenes.Sandbox.Ender.Scripts
 {
-    [SerializeField] private float scrollSpeedX = 0.2f;
-    [SerializeField] private float scrollSpeedY = 0f;
-
-    private RawImage rawImage;
-    private Rect uvRect;
-
-    private void Awake()
+    [RequireComponent(typeof(RawImage))]
+    public class WaveScrollUI : MonoBehaviour
     {
-        rawImage = GetComponent<RawImage>();
-        uvRect = rawImage.uvRect;
-    }
+        [SerializeField] private float scrollSpeedX = 0.2f;
+        [SerializeField] private float scrollSpeedY = 0f;
 
-    private void Update()
-    {
-        uvRect.x += scrollSpeedX * Time.deltaTime;
-        uvRect.y += scrollSpeedY * Time.deltaTime;
-        rawImage.uvRect = uvRect;
+        private RawImage rawImage;
+        private Rect uvRect;
+
+        private void Awake()
+        {
+            rawImage = GetComponent<RawImage>();
+            uvRect = rawImage.uvRect;
+        }
+
+        private void Update()
+        {
+            uvRect.x += scrollSpeedX * Time.deltaTime;
+            uvRect.y += scrollSpeedY * Time.deltaTime;
+            rawImage.uvRect = uvRect;
+        }
     }
 }

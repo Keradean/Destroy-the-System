@@ -22,11 +22,22 @@ namespace Project.Scripts.Dennis.Nodes
                 _ => throw new System.ArgumentException("Invalid Direction")
             };
         }
+        // Darf der Player diesen Node betreten? Gesperrte Nodes (z.B. EndNode, CoreNode) überschreiben das
+        public virtual bool CanEnter()
+        {
+            return true;
+        }
         // virtual method that can be overridden by derived classes to handle player entering the node
         public virtual void OnPlayerEnter()
         {
             Debug.Log("Player entered node: " + gameObject.name);
         }
+        // virtual method that can be overridden by derived classes to handle player exiting the node
+        public virtual void OnPlayerExit()
+        {
+            Debug.Log("Player exited node: " + gameObject.name);
+        }
+
         // Draws a half line from the current node to the neighbor node in the editor for visualization
         private void OnDrawGizmos()
         {
