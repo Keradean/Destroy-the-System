@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Game;
 using UnityEngine;
 
 namespace Project.Scripts.Dennis.Nodes
@@ -5,6 +6,7 @@ namespace Project.Scripts.Dennis.Nodes
     public class EndNode : Node
     {
         [SerializeField] private bool isOpen = false;
+        [SerializeField] private GameManager _gameManager;
         [ContextMenu("Test: Öffnen")]
         public void Open()
         {
@@ -19,8 +21,8 @@ namespace Project.Scripts.Dennis.Nodes
 
         public override void OnPlayerEnter()
         {
-            // TODO: GameManager.Win() aufrufen, sobald dieser halt existiert
-            Debug.Log("Juhu Ich habe Gewonnen, Ihr Pfeifen: " + gameObject.name);
+            // TODO: später erst Exit-Animation, Win dann bei AE_OnExitEndFrame
+            _gameManager.Win();
         }
     }
 }

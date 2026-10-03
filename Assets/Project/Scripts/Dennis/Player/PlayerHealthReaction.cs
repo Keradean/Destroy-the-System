@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Game;
 using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
@@ -9,6 +10,8 @@ namespace Project.Scripts.Dennis.Player
         private static readonly int DamageHash = Animator.StringToHash("Damage");
         private static readonly int DieHash = Animator.StringToHash("Die");
         private static readonly int DieStateHash = Animator.StringToHash("Die");
+
+        [SerializeField] private GameManager _gameManager;
 
         private HealthComponent _health;
         private Animator _animator;
@@ -70,8 +73,7 @@ namespace Project.Scripts.Dennis.Player
         // Wird über AE_OnDeathEndFrame aufgerufen
         public void OnDeathAnimationFinished()
         {
-            // TODO: GameManager.Lose() aufrufen, sobald es den GameManager gibt
-            Debug.Log("GAME OVER");
+            _gameManager.Lose();
         }
     }
 }
