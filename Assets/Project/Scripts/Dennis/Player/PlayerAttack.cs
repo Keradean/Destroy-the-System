@@ -2,54 +2,132 @@ using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
 {
-    public class PlayerAttack : MonoBehaviour 
+    // Sucht den nächsten Gegner, startet die Attack-Animation und schießt beim Shoot-Event
+    public class PlayerAttack : MonoBehaviour
     {
-        [SerializeField] private float _attackInterval = 1f;
-        [SerializeField] private float range = 5f;
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
+        private static readonly int AttackStateHash = Animator.StringToHash("Attack");
+        private static readonly int AttackSpeedHash = Animator.StringToHash("AttackSpeed");
+
+        [Header("Angriff")]
         [SerializeField] private LayerMask _enemyLayer;
-        
-        //Intern:
-        // Collider[] _hits, gleich hier mit new Collider[32] anlegen
-        Collider[] hits = new Collider[32];
-        float _timer = 0f;
+        [SerializeField] private float _maxAttackDuration = 3f;     // Sicherheitsnetz, falls AttackEnd verpasst wird
 
-        void Update()
+        [Header("Projektil")]
+        [SerializeField] private GameObject _projectilePrefab;
+        [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
+        [SerializeField] private PoolManager _poolManager;   // leer lassen, wird dann in der Szene gesucht
+
+        private readonly Collider[] _hits = new Collider[64];
+        private Animator _animator;
+        private PlayerDataSO _data;
+        private Collider _target;
+        private bool _isAttacking;
+        private bool _enteredAttackState;
+        private float _timer;
+
+        private void Awake()
         {
-            TryAttack();
+            _animator = GetComponentInChildren<Animator>();
+            _data = GetComponent<PlayerSetup>().Data;
+            if (_poolManager == null) _poolManager = FindAnyObjectByType<PoolManager>();
         }
 
-        private void TryAttack()
+        private void Start()
         {
-            //timer hochzählen
+            _animator.SetFloat(AttackSpeedHash, _data.attackSpeed);
+        }
+
+        private void Update()
+        {
             _timer += Time.deltaTime;
-            //Noch nicht so weit? raus.
-            if (_timer < _attackInterval) return;
-            //Nächsten Gegner suchen, in einer Variable merken
-            Transform nearestEnemy = FindNearestEnemy();
-            //Keiner da? raus.(Bereitschaft, Timer NICHT zurücksetzen)
-            if (nearestEnemy == null) return;
-            //Timer auf null
+
+            if (_isAttacking)
+            {
+                CheckAttackStateLeft();
+                if (_isAttacking && _timer >= _maxAttackDuration) OnAttackFinished();
+                return;
+            }
+
+            if (_timer < _data.attackInterval) return;
+
+            Collider nearest = FindNearestEnemy();
+            if (nearest == null) return;   // Bereitschaft, Timer läuft weiter
+
+            _target = nearest;
+            _isAttacking = true;
             _timer = 0f;
-            // Debug log mit dem namen des Ziels
-            Debug.Log($"Attacking {nearestEnemy.name}");
+
+            _animator.SetTrigger(AttackHash);
         }
-        
-        private Transform FindNearestEnemy()
+
+        // Wird über AE_OnShootFrame aufgerufen
+        public void Shoot()
         {
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, range, hits, _enemyLayer);
-            Transform nearestEnemy = null;
+            if (!enabled) return;   // nach dem Tod nicht mehr schießen
+
+            // Ziel könnte inzwischen tot oder weg sein, dann neu suchen
+            if (!IsValidTarget(_target)) _target = FindNearestEnemy();
+            if (_target == null) return;
+
+            // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
+            Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
+            GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
+            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _poolManager);
+        }
+
+        // Wird über AE_OnAttackEndFrame aufgerufen
+        public void OnAttackFinished()
+        {
+            _isAttacking = false;
+            _enteredAttackState = false;
+            _target = null;
+            _timer = 0f;
+        }
+
+        // Ersatz für AE_OnAttackEndFrame: Angriff endet, sobald der Animator den Attack-State verlassen hat
+        private void CheckAttackStateLeft()
+        {
+            bool inAttack = _animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AttackStateHash
+                || (_animator.IsInTransition(0) && _animator.GetNextAnimatorStateInfo(0).shortNameHash == AttackStateHash);
+
+            if (inAttack) _enteredAttackState = true;
+            else if (_enteredAttackState) OnAttackFinished();
+        }
+
+        private Collider FindNearestEnemy()
+        {
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, _data.attackRange, _hits, _enemyLayer);
+            Collider nearest = null;
             float nearestDistance = Mathf.Infinity;
 
             for (int i = 0; i < hitCount; i++)
             {
-                float distance = Vector3.Distance(transform.position, hits[i].transform.position);
+                if (!IsValidTarget(_hits[i])) continue;
+
+                float distance = Vector3.Distance(transform.position, _hits[i].transform.position);
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
-                    nearestEnemy = hits[i].transform;
+                    nearest = _hits[i];
                 }
             }
-            return nearestEnemy;
+            return nearest;
+        }
+
+        private static bool IsValidTarget(Collider target)
+        {
+            return target != null && target.enabled && target.gameObject.activeInHierarchy;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            // Im Editor läuft Awake nicht, deshalb Reichweite direkt aus dem PlayerSetup lesen
+            PlayerSetup setup = GetComponent<PlayerSetup>();
+            if (setup == null || setup.Data == null) return;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, setup.Data.attackRange);
         }
     }
 }

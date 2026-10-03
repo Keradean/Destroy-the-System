@@ -1,15 +1,15 @@
 using UnityEngine;
 using Project.Scripts.Dennis.Nodes;
+using Project.Scripts.Dennis.Game;   // Dennis: für den GameManager
 
 namespace Project.Scripts.Philipp.Hacking
 {
     public class HackNode : Node
     {
         [Header("Dependencies")]
-        // [SerializeField] private GameManager gameManager;    //TODO remove comment as soon as GameManager is implemented
+        [SerializeField] private GameManager gameManager;   // Dennis: GameManager existiert jetzt
         [Header("Settings")]
         [SerializeField] private float hackingTime = 5f;
-        //[SerializeField] private string playerTag = "Player"; wird nicht mehr benötigt
 
         [Header("Hacking State")]
         [SerializeField] private float progress = 0f;
@@ -22,42 +22,29 @@ namespace Project.Scripts.Philipp.Hacking
         #endregion
 
         #region Unity Callbacks
+        // Dennis: Feld leer gelassen, dann den GameManager in der Szene suchen
+        void Awake()
+        {
+            if (gameManager == null) gameManager = FindAnyObjectByType<GameManager>();
+        }
+
         void Update()
         {
             if (isHacked || !isPlayerInside) return;
 
             progress += Time.deltaTime;
 
-            // TODO Remove Comment as soon GameManager is implemented
-            // gameManager.AddAlarm();
+            // Dennis: ALARM steigt pro Sekunde Hacken
+            gameManager.AddAlarm(Time.deltaTime);
 
             if (progress >= hackingTime)
             {
                 isHacked = true;
+                isPlayerInside = false;   // Dennis: fertig gehackt, Player zählt nicht mehr als "drin"
                 Debug.Log("[HackNode] Hacking Completed!");
+                gameManager.NodeHacked();   // Dennis: Hack an den GameManager melden
             }
         }
-        /// <summary>
-        ///  Das brauchen wir nicht mehr kann gelöcht werden, da wir die OnPlayerEnter und OnPlayerExit Methoden
-        /// überschreiben und nicht mehr über Trigger arbeiten.
-        /// </summary>
-        /*
-         private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag(playerTag))
-            {
-                OnPlayerEnter();
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag(playerTag))
-            {
-                OnPlayerExit();
-            }
-        }
-        */
         #endregion
 
         #region Methods
@@ -65,8 +52,16 @@ namespace Project.Scripts.Philipp.Hacking
         {
             base.OnPlayerEnter();
 
+            // Dennis: ein anderer Node ist angefangen und muss erst fertig werden
+            if (!isHacked && !gameManager.CanStartHack(this))
+            {
+                Debug.Log("[HackNode] Gesperrt, erst den angefangenen Node fertig hacken");
+                return;
+            }
+
             if (!isHacked)
             {
+                gameManager.HackStarted(this);   // Dennis: dieser Node ist jetzt der aktive Hack
                 isPlayerInside = true;
                 Debug.Log("[HackNode] Hacking started!");
             }
@@ -74,6 +69,9 @@ namespace Project.Scripts.Philipp.Hacking
 
         public override void OnPlayerExit() // Geändert von Dennis zu Override um einen weg anstatt zwei zu haben.
         {
+            // Dennis: nur melden, wenn wirklich ein Hack abgebrochen wird
+            if (!isPlayerInside) return;
+
             isPlayerInside = false;
             Debug.Log("[HackNode] Hacking interrupted!");
         }
