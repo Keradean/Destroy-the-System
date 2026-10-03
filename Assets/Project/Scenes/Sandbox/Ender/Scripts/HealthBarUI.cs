@@ -1,28 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarUI : MonoBehaviour
+namespace Project.Scenes.Sandbox.Ender.Scripts
 {
-    [SerializeField] private Image currentHealthBar;
-    [SerializeField] private Image lostHealthBar;
-
-    public void SetHealth(float currentHealth, float maxHealth)
+    public class HealthBarUI : MonoBehaviour
     {
-        if (maxHealth <= 0f)
-        {
-            maxHealth = 1f;
-        }
+        [SerializeField] private Image currentHealthBar;
+        [SerializeField] private Image lostHealthBar;
 
-        float healthPercent = Mathf.Clamp01(currentHealth / maxHealth);
-
-        if (currentHealthBar)
+        // Wird vom Gameplay-Code aufgerufen, wenn sich die Lebenspunkte ändern.
+        // Beispiel: healthBarUI.SetHealth(75f, 100f);
+        // currentHealth = aktuelle Lebenspunkte
+        // maxHealth = maximale Lebenspunkte
+        public void SetHealth(float currentHealth, float maxHealth)
         {
-            currentHealthBar.fillAmount = healthPercent;
-        }
+            if (maxHealth <= 0f)
+            {
+                maxHealth = 1f;
+            }
 
-        if (lostHealthBar)
-        {
-            lostHealthBar.fillAmount = 1f - healthPercent;
+            float healthPercent = Mathf.Clamp01(currentHealth / maxHealth);
+
+            if (currentHealthBar)
+            {
+                currentHealthBar.fillAmount = healthPercent;
+            }
+
+            if (lostHealthBar)
+            {
+                lostHealthBar.fillAmount = 1f - healthPercent;
+            }
         }
     }
 }

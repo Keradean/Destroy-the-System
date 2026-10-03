@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AOC_Scanner
+  m_Controller: {fileID: 9100000, guid: f3f3c5612b4a78d448e7f7585cc93f2a, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 18d141e2e7da21f40ba4b359bdce744e, type: 2}
+    m_OverrideClip: {fileID: -8720334312217680587, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c846e0bff45b827428150b58759f7162, type: 2}
+    m_OverrideClip: {fileID: -3069453541848569432, guid: f5cbb4b1b75c7b442a3b7281d1ab605d, type: 3}
