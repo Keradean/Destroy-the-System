@@ -16,6 +16,7 @@ namespace Project.Scripts.Dennis.Player
         [Header("Projektil")]
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
+        [SerializeField] private PoolManager _poolManager;   // leer lassen, wird dann in der Szene gesucht
 
         private readonly Collider[] _hits = new Collider[64];
         private Animator _animator;
@@ -29,6 +30,7 @@ namespace Project.Scripts.Dennis.Player
         {
             _animator = GetComponentInChildren<Animator>();
             _data = GetComponent<PlayerSetup>().Data;
+            if (_poolManager == null) _poolManager = FindAnyObjectByType<PoolManager>();
         }
 
         private void Start()
@@ -70,8 +72,8 @@ namespace Project.Scripts.Dennis.Player
 
             // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
             Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
-            GameObject projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
-            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage);
+            GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
+            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _poolManager);
         }
 
         // Wird über AE_OnAttackEndFrame aufgerufen
