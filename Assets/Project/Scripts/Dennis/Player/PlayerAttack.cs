@@ -2,54 +2,107 @@ using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
 {
-    public class PlayerAttack : MonoBehaviour 
+    // Sucht den nächsten Gegner, startet die Attack-Animation und schießt beim Shoot-Event
+    public class PlayerAttack : MonoBehaviour
     {
-        [SerializeField] private float _attackInterval = 1f;
-        [SerializeField] private float range = 5f;
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
+
+        [Header("Angriff")]
+        [SerializeField] private float _attackInterval = 0.5f;      // Pause zwischen zwei Angriffen
+        [SerializeField] private float _range = 5f;
         [SerializeField] private LayerMask _enemyLayer;
-        
-        //Intern:
-        // Collider[] _hits, gleich hier mit new Collider[32] anlegen
-        Collider[] hits = new Collider[32];
-        float _timer = 0f;
+        [SerializeField] private float _maxAttackDuration = 3f;     // Sicherheitsnetz, falls AttackEnd verpasst wird
 
-        void Update()
+        [Header("Projektil")]
+        [SerializeField] private GameObject _projectilePrefab;
+        [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
+
+        private readonly Collider[] _hits = new Collider[64];
+        private Animator _animator;
+        private Collider _target;
+        private bool _isAttacking;
+        private float _timer;
+
+        private void Awake()
         {
-            TryAttack();
+            _animator = GetComponentInChildren<Animator>();
         }
 
-        private void TryAttack()
+        private void Update()
         {
-            //timer hochzählen
             _timer += Time.deltaTime;
-            //Noch nicht so weit? raus.
+
+            if (_isAttacking)
+            {
+                if (_timer >= _maxAttackDuration) OnAttackFinished();
+                return;
+            }
+
             if (_timer < _attackInterval) return;
-            //Nächsten Gegner suchen, in einer Variable merken
-            Transform nearestEnemy = FindNearestEnemy();
-            //Keiner da? raus.(Bereitschaft, Timer NICHT zurücksetzen)
-            if (nearestEnemy == null) return;
-            //Timer auf null
+
+            Collider nearest = FindNearestEnemy();
+            if (nearest == null) return;   // Bereitschaft, Timer läuft weiter
+
+            _target = nearest;
+            _isAttacking = true;
             _timer = 0f;
-            // Debug log mit dem namen des Ziels
-            Debug.Log($"Attacking {nearestEnemy.name}");
+
+            Debug.Log("ANGRIFF startet auf " + nearest.name);   // TODO: nach dem Testen entfernen
+            _animator.SetTrigger(AttackHash);
         }
-        
-        private Transform FindNearestEnemy()
+
+        // Wird über AE_OnShootFrame aufgerufen
+        public void Shoot()
         {
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, range, hits, _enemyLayer);
-            Transform nearestEnemy = null;
+            Debug.Log("SHOOT aufgerufen");   // TODO: nach dem Testen entfernen
+
+            // Ziel könnte inzwischen tot oder weg sein, dann neu suchen
+            if (!IsValidTarget(_target)) _target = FindNearestEnemy();
+            if (_target == null) return;
+
+            // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
+            Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
+            GameObject projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
+            projectile.GetComponent<PlayerProjectile>().Launch(_target);
+        }
+
+        // Wird über AE_OnAttackEndFrame aufgerufen
+        public void OnAttackFinished()
+        {
+            _isAttacking = false;
+            _target = null;
+            _timer = 0f;
+        }
+
+        private Collider FindNearestEnemy()
+        {
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, _range, _hits, _enemyLayer);
+            Collider nearest = null;
             float nearestDistance = Mathf.Infinity;
 
             for (int i = 0; i < hitCount; i++)
             {
-                float distance = Vector3.Distance(transform.position, hits[i].transform.position);
+                if (!IsValidTarget(_hits[i])) continue;
+
+                float distance = Vector3.Distance(transform.position, _hits[i].transform.position);
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
-                    nearestEnemy = hits[i].transform;
+                    nearest = _hits[i];
                 }
             }
-            return nearestEnemy;
+            return nearest;
+        }
+
+        private static bool IsValidTarget(Collider target)
+        {
+            return target != null && target.enabled && target.gameObject.activeInHierarchy;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _range);
         }
     }
 }
