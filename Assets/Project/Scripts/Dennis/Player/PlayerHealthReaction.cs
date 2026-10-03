@@ -25,6 +25,7 @@ namespace Project.Scripts.Dennis.Player
             _animator = GetComponentInChildren<Animator>();
             _move = GetComponent<PlayerMoveComponent>();
             _attack = GetComponent<PlayerAttack>();
+            if (_gameManager == null) _gameManager = FindAnyObjectByType<GameManager>();
         }
 
         private void OnEnable()

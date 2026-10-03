@@ -8,6 +8,12 @@ namespace Project.Scripts.Dennis.Nodes
     {
         [SerializeField] private GameManager _gameManager;
 
+        private void Awake()
+        {
+            // Feld leer gelassen, dann in der Szene suchen
+            if (_gameManager == null) _gameManager = FindAnyObjectByType<GameManager>();
+        }
+
         public override bool CanEnter()
         {
             return _gameManager != null && _gameManager.IsCoreUnlocked;

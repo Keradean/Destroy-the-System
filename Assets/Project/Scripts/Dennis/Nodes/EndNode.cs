@@ -7,6 +7,12 @@ namespace Project.Scripts.Dennis.Nodes
     {
         [SerializeField] private bool isOpen = false;
         [SerializeField] private GameManager _gameManager;
+
+        private void Awake()
+        {
+            // Feld leer gelassen, dann in der Szene suchen
+            if (_gameManager == null) _gameManager = FindAnyObjectByType<GameManager>();
+        }
         [ContextMenu("Test: Öffnen")]
         public void Open()
         {

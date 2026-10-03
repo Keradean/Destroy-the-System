@@ -23,6 +23,12 @@ namespace Project.Scripts.Philipp.Hacking
         #endregion
 
         #region Unity Callbacks
+        // Dennis: Feld leer gelassen, dann den GameManager in der Szene suchen
+        void Awake()
+        {
+            if (gameManager == null) gameManager = FindAnyObjectByType<GameManager>();
+        }
+
         void Update()
         {
             if (isHacked || !isPlayerInside) return;
