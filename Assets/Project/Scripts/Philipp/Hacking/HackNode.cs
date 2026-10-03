@@ -10,7 +10,6 @@ namespace Project.Scripts.Philipp.Hacking
         [SerializeField] private GameManager gameManager;   // Dennis: GameManager existiert jetzt
         [Header("Settings")]
         [SerializeField] private float hackingTime = 5f;
-        //[SerializeField] private string playerTag = "Player"; wird nicht mehr benötigt
 
         [Header("Hacking State")]
         [SerializeField] private float progress = 0f;
@@ -53,8 +52,16 @@ namespace Project.Scripts.Philipp.Hacking
         {
             base.OnPlayerEnter();
 
+            // Dennis: ein anderer Node ist angefangen und muss erst fertig werden
+            if (!isHacked && !gameManager.CanStartHack(this))
+            {
+                Debug.Log("[HackNode] Gesperrt, erst den angefangenen Node fertig hacken");
+                return;
+            }
+
             if (!isHacked)
             {
+                gameManager.HackStarted(this);   // Dennis: dieser Node ist jetzt der aktive Hack
                 isPlayerInside = true;
                 Debug.Log("[HackNode] Hacking started!");
             }

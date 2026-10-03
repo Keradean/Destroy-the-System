@@ -21,6 +21,7 @@ namespace Project.Scripts.Dennis.Game
         private float _alarm;
         private int _hackedNodes;
         private bool _coreReached;
+        private MonoBehaviour _activeHack;   // angefangener Hack, der erst fertig sein muss
 
         public GameState State { get; private set; } = GameState.Playing;
         public float Alarm => _alarm;
@@ -51,10 +52,23 @@ namespace Project.Scripts.Dennis.Game
             OnAlarmChanged?.Invoke(_alarm, _maxAlarm);
         }
 
+        // Nur ein Hack zur Zeit: frei, solange keiner angefangen ist oder es derselbe Node ist
+        public bool CanStartHack(MonoBehaviour hackNode)
+        {
+            return _activeHack == null || _activeHack == hackNode;
+        }
+
+        public void HackStarted(MonoBehaviour hackNode)
+        {
+            _activeHack = hackNode;
+        }
+
         // Wird von HackNode aufgerufen, wenn ein Node fertig gehackt ist
         public void NodeHacked()
         {
             if (State != GameState.Playing) return;
+
+            _activeHack = null;   // nächster Node darf angefangen werden
 
             bool wasUnlocked = IsCoreUnlocked;
             _hackedNodes++;
