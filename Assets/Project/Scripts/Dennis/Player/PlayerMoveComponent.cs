@@ -7,16 +7,17 @@ namespace Project.Scripts.Dennis.Player
     public class PlayerMoveComponent : MonoBehaviour
     {
         [SerializeField] Node _currentNode;
-        [SerializeField] private float _moveSpeed = 5f;
-        
+
         PlayerInputReader _input;
         public bool IsMoving => _targetNode != null;
         private Node _targetNode;
+        private float _moveSpeed;
         ///////////////////////////////////////////////////////////
         void Awake()
         {
             _currentNode.OnPlayerEnter();
             _input = GetComponent<PlayerInputReader>();
+            _moveSpeed = GetComponent<PlayerSetup>().Data.moveSpeed;
         }
         // Update is called once per frame
         void Update()

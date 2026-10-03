@@ -9,8 +9,6 @@ namespace Project.Scripts.Dennis.Player
         private static readonly int AttackStateHash = Animator.StringToHash("Attack");
 
         [Header("Angriff")]
-        [SerializeField] private float _attackInterval = 0.5f;      // Pause zwischen zwei Angriffen
-        [SerializeField] private float _range = 5f;
         [SerializeField] private LayerMask _enemyLayer;
         [SerializeField] private float _maxAttackDuration = 3f;     // Sicherheitsnetz, falls AttackEnd verpasst wird
 
@@ -20,6 +18,7 @@ namespace Project.Scripts.Dennis.Player
 
         private readonly Collider[] _hits = new Collider[64];
         private Animator _animator;
+        private PlayerDataSO _data;
         private Collider _target;
         private bool _isAttacking;
         private bool _enteredAttackState;
@@ -28,6 +27,7 @@ namespace Project.Scripts.Dennis.Player
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
+            _data = GetComponent<PlayerSetup>().Data;
         }
 
         private void Update()
@@ -41,7 +41,7 @@ namespace Project.Scripts.Dennis.Player
                 return;
             }
 
-            if (_timer < _attackInterval) return;
+            if (_timer < _data.attackInterval) return;
 
             Collider nearest = FindNearestEnemy();
             if (nearest == null) return;   // Bereitschaft, Timer läuft weiter
@@ -66,7 +66,7 @@ namespace Project.Scripts.Dennis.Player
             // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
             Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
             GameObject projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
-            projectile.GetComponent<PlayerProjectile>().Launch(_target);
+            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage);
         }
 
         // Wird über AE_OnAttackEndFrame aufgerufen
@@ -90,7 +90,7 @@ namespace Project.Scripts.Dennis.Player
 
         private Collider FindNearestEnemy()
         {
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, _range, _hits, _enemyLayer);
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, _data.attackRange, _hits, _enemyLayer);
             Collider nearest = null;
             float nearestDistance = Mathf.Infinity;
 
@@ -115,8 +115,12 @@ namespace Project.Scripts.Dennis.Player
 
         private void OnDrawGizmosSelected()
         {
+            // Im Editor läuft Awake nicht, deshalb Reichweite direkt aus dem PlayerSetup lesen
+            PlayerSetup setup = GetComponent<PlayerSetup>();
+            if (setup == null || setup.Data == null) return;
+
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _range);
+            Gizmos.DrawWireSphere(transform.position, setup.Data.attackRange);
         }
     }
 }
