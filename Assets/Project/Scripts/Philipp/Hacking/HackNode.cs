@@ -1,6 +1,7 @@
 using UnityEngine;
 using Project.Scripts.Dennis.Nodes;
 using Project.Scripts.Dennis.Game;   // Dennis: für den GameManager
+using Project.Scripts.Dennis.Audio;  // Dennis: für die Sounds
 
 namespace Project.Scripts.Philipp.Hacking
 {
@@ -10,6 +11,12 @@ namespace Project.Scripts.Philipp.Hacking
         [SerializeField] private GameManager gameManager;   // Dennis: GameManager existiert jetzt
         [Header("Settings")]
         [SerializeField] private float hackingTime = 5f;
+
+        // Dennis: Sounds, am besten einmal im HackNode-Prefab eintragen
+        [Header("Sound")]
+        [SerializeField] private AudioEventChannel audioChannel;
+        [SerializeField] private SoundData hackStartSound;
+        [SerializeField] private SoundData hackCompleteSound;
 
         [Header("Hacking State")]
         [SerializeField] private float progress = 0f;
@@ -43,6 +50,7 @@ namespace Project.Scripts.Philipp.Hacking
                 isPlayerInside = false;   // Dennis: fertig gehackt, Player zählt nicht mehr als "drin"
                 Debug.Log("[HackNode] Hacking Completed!");
                 gameManager.NodeHacked();   // Dennis: Hack an den GameManager melden
+                if (audioChannel != null) audioChannel.RaiseSFX(hackCompleteSound, transform.position);   // Dennis
             }
         }
         #endregion
@@ -64,6 +72,7 @@ namespace Project.Scripts.Philipp.Hacking
                 gameManager.HackStarted(this);   // Dennis: dieser Node ist jetzt der aktive Hack
                 isPlayerInside = true;
                 Debug.Log("[HackNode] Hacking started!");
+                if (audioChannel != null) audioChannel.RaiseSFX(hackStartSound, transform.position);   // Dennis
             }
         }
 

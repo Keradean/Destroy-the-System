@@ -31,10 +31,6 @@ namespace Project.Scripts.Dennis.Network
             
             GameObject link = Instantiate(_linkPrefab, middle, Quaternion.identity);
             link.transform.LookAt(to.transform.position);
-            link.transform.localScale = new Vector3(
-                link.transform.localScale.x,
-                link.transform.localScale.y,
-                Vector3.Distance(from.transform.position, to.transform.position));
         }
     }
 }

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdd60e8a8a3b3e1ffa6efda05134db19, type: 3}
-  m_Name: Music_Game
+  m_Name: SFX_Playershoot
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Audio.SoundData
   clips:
-  - {fileID: 8300000, guid: 556910035014c23749fcc782b1c2f55b, type: 3}
-  volume: 0.716
+  - {fileID: 8300000, guid: 2bbf633d1ff0f6ee1a0b4550d029fbc2, type: 3}
+  volume: 0.836
   minPitch: 0.9
   maxPitch: 1.1
-  spatialBlend: 0
+  spatialBlend: 1
   minDistance: 1
   maxDistance: 25

@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Audio;
 using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
@@ -8,6 +9,10 @@ namespace Project.Scripts.Dennis.Player
         [SerializeField] private float _speed = 12f;
         [SerializeField] private float _hitDistance = 0.3f;
         [SerializeField] private float _maxLifetime = 3f;
+
+        [Header("Sound")]
+        [SerializeField] private AudioEventChannel _audioChannel;
+        [SerializeField] private SoundData _hitSound;
 
         private Collider _target;
         private float _damage;
@@ -57,6 +62,8 @@ namespace Project.Scripts.Dennis.Player
             {
                 health.TakeDamage(_damage);
             }
+
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_hitSound, transform.position);
 
             // TODO: später Impact-Animation abspielen, erst danach zurück in den Pool
             ReturnToPool();
