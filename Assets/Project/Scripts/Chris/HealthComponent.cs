@@ -25,6 +25,8 @@ public class HealthComponent : MonoBehaviour
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 
         if (IsDead) OnDeath?.Invoke();
+        
+        
     }
     public void Heal(float amount)
     {
