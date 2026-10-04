@@ -926,10 +926,6 @@ PrefabInstance:
       propertyPath: 'enemySpawners.Array.data[0]'
       value: 
       objectReference: {fileID: 4719221439950676772}
-    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
-      propertyPath: enemyPool.Array.data[2].baseWeight
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 6422555642117360532, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: m_Name
       value: SpawnManager

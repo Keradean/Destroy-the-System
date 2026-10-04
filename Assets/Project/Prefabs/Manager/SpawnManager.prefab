@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6422555642117360532}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
     minAlarmPercent: 0.15
   - name: Firewall
     enemyData: {fileID: 11400000, guid: 82331c12808a16045a770eb3edbe7d90, type: 2}
-    baseWeight: 0
-    minAlarmPercent: 0.3
+    baseWeight: 10
+    minAlarmPercent: 0.2
   bossEnemyData: {fileID: 11400000, guid: b7e1f4f0cb300e243b7fdd449bc107b2, type: 2}
   bossSpawnPoint: {fileID: 651133754127192923}
   baseSpawnInterval: 8

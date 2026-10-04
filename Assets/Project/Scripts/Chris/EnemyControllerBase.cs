@@ -32,6 +32,7 @@ public class EnemyControllerBase : MonoBehaviour
     #region Internal
     private float nextAttackTime;
     private float nextSpecialTime;
+    private bool isMoving;
     
     private void Awake()
     {
@@ -44,6 +45,11 @@ public class EnemyControllerBase : MonoBehaviour
         Spawner = GetComponent<SpawnerComponent>();
         FXBridge = GetComponent<FXBridge>();
 
+        if (Agent!= null)
+        {
+            Agent.updateRotation = false;
+            Agent.updatePosition = true;
+        }
         FindPlayer();
     }
     //TODO Enable and Disable after Components are written and wiring can begin
@@ -93,12 +99,14 @@ public class EnemyControllerBase : MonoBehaviour
     {
         if (Target == null || Health.IsDead || Stats == null) return;
         if (Target == null) FindPlayer(); // just in case
+        RotateTowardsTarget();
+        HandleLocomotiveFX();
         float distance = Vector3.Distance(transform.position, Target.position);
         Anim.SetFloat(DistanceToTargetHash, distance);
         Anim.SetBool(InMeleeRangeHash, distance <= Stats.MeleeRange);
         Anim.SetBool(InRangedRangeHash, distance <= Stats.RangedRange);
         bool canAttack = Time.time >= nextAttackTime;
-        if (canAttack) Anim.SetBool(CanAttackHash, canAttack);
+        Anim.SetBool(CanAttackHash, canAttack);
         if (Stats.IsSpecial)
         {
             bool canSpecial = Time.time >= nextSpecialTime;
@@ -110,6 +118,29 @@ public class EnemyControllerBase : MonoBehaviour
 
 
     #region Helpers
+    private void RotateTowardsTarget()
+    {
+        Vector3 lookDir = Vector3.zero;
+        if (Agent != null && Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f) lookDir = Agent.velocity.normalized;
+        else if (Target != null) lookDir = (Target.position - transform.position).normalized;
+        lookDir.y = 0;
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+        }
+    }
+    private void HandleLocomotiveFX()
+    {
+        if (Agent == null || FXBridge == null) return;
+        bool currentlyMoving = Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f;
+        if (currentlyMoving != isMoving)
+        {
+            isMoving = currentlyMoving;
+            if (isMoving) FXBridge.OnAnimationEvent("AE_OnMoveStart");
+            else FXBridge.OnAnimationEvent("AE_OnMoveStop");
+        }
+    }
     private void FindPlayer()
     {
         GameObject player = GameObject.FindWithTag("Player");
@@ -173,6 +204,8 @@ public class EnemyControllerBase : MonoBehaviour
     public void AE_OnScanSweep() => RelayAnimationEvent("AE_OnScanSweep");
     public void AE_OnTurn() => RelayAnimationEvent("AE_OnTurn");
     public void AE_OnStepFrame() => RelayAnimationEvent("AE_OnStepFrame");
+    public void AE_OnMoveStart() => RelayAnimationEvent("AE_OnMoveStart");
+    public void AE_OnMoveStop() => RelayAnimationEvent("AE_OnMoveStop");
 
     // --- BOSS SUMMON EVENTS ---
     public void AE_OnSummonStartFrame() => RelayAnimationEvent("AE_OnSummonStartFrame");

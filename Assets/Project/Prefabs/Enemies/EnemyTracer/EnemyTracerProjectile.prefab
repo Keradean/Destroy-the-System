@@ -74,6 +74,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  fXBridge: {fileID: 0}
 --- !u!1001 &3632388722936885013
 PrefabInstance:
   m_ObjectHideFlags: 0

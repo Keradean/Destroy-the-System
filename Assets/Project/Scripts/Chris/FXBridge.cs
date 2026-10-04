@@ -11,20 +11,27 @@ public class FXBridge : MonoBehaviour
         AudioSource
     }
 
+    public enum ParticleAction
+    {
+        Play,
+        StopEmitting,
+        StopAndClear
+    }
+
     [Serializable]
     public struct FXBinding
     {
         public string eventName;
         public FXType type;
         
-        [Header("Targets (Assign based on Type)")]
+        [Header("Targets")]
         public ParticleSystem particle;
         public GameObject targetObject;
         public AudioSource audioSource;
 
         [Header("Settings")]
+        public ParticleAction particleAction;
         public bool toggleState;
-        public bool stopParticleOnDisable;
     }
 
     [Header("Event Bindings")]
@@ -45,6 +52,7 @@ public class FXBridge : MonoBehaviour
         {
             var binding = fxBindings[i];
             if (string.IsNullOrEmpty(binding.eventName)) continue;
+
             if (!bindingLookup.TryGetValue(binding.eventName, out var list))
             {
                 list = new List<FXBinding>();
@@ -69,14 +77,24 @@ public class FXBridge : MonoBehaviour
         switch (binding.type)
         {
             case FXType.ParticleSystem:
-                if (binding.particle != null)
+                if (binding.particle == null) break;
+
+                switch (binding.particleAction)
                 {
-                    if (binding.stopParticleOnDisable)
-                        binding.particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                    else
+                    case ParticleAction.Play:
                         if (!binding.particle.gameObject.activeSelf)
                             binding.particle.gameObject.SetActive(true);
+
                         binding.particle.Play(true);
+                        break;
+
+                    case ParticleAction.StopEmitting:
+                        binding.particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        break;
+
+                    case ParticleAction.StopAndClear:
+                        binding.particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                        break;
                 }
                 break;
 
@@ -89,7 +107,9 @@ public class FXBridge : MonoBehaviour
 
             case FXType.AudioSource:
                 if (binding.audioSource != null)
+                {
                     binding.audioSource.Play();
+                }
                 break;
         }
     }

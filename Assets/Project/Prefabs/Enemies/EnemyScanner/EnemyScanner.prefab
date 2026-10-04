@@ -86,7 +86,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 40
   m_AngularSpeed: 240
-  m_StoppingDistance: 2
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -206,29 +206,36 @@ MonoBehaviour:
     particle: {fileID: 8656873437160935740}
     targetObject: {fileID: 1377070784223614062}
     audioSource: {fileID: 0}
+    particleAction: 0
     toggleState: 0
-    stopParticleOnDisable: 0
+  - eventName: AE_OnSpawnStartFrame
+    type: 0
+    particle: {fileID: 7809169786201564816}
+    targetObject: {fileID: 3529080514146270732}
+    audioSource: {fileID: 0}
+    particleAction: 2
+    toggleState: 0
   - eventName: AE_OnChargeStartFrame
     type: 0
     particle: {fileID: 7809169786201564816}
     targetObject: {fileID: 3529080514146270732}
     audioSource: {fileID: 0}
+    particleAction: 0
     toggleState: 1
-    stopParticleOnDisable: 0
   - eventName: AE_OnAttackEndFrame
     type: 0
     particle: {fileID: 7809169786201564816}
     targetObject: {fileID: 3529080514146270732}
     audioSource: {fileID: 0}
+    particleAction: 1
     toggleState: 0
-    stopParticleOnDisable: 1
   - eventName: AE_OnDeathStartFrame
     type: 0
     particle: {fileID: 4272695356010632947}
     targetObject: {fileID: 3684892940327407663}
     audioSource: {fileID: 0}
+    particleAction: 0
     toggleState: 1
-    stopParticleOnDisable: 0
 --- !u!1001 &3607415248529141372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -445,10 +452,6 @@ PrefabInstance:
     - target: {fileID: 2158906404667320636, guid: 7cbccadf611ca664bb6a7466a61e7bee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6844547984852063536, guid: 7cbccadf611ca664bb6a7466a61e7bee, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7637230274524643686, guid: 7cbccadf611ca664bb6a7466a61e7bee, type: 3}
       propertyPath: m_Name
