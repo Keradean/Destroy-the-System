@@ -22,6 +22,7 @@ public class EnemyDataSO : ScriptableObject
     public float baseDamage;
     public float meleeRange;
     public float rangedRange;
+    public float attackCooldown;
 
     [Header("Special Stats")]
     public bool hasSpecial;

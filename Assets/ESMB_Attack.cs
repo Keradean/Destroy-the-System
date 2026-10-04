@@ -26,8 +26,9 @@ public class ESMB_Attack : EnemySMBase
     {
         if (eventName == "AE_OnHitFrame" || eventName == "AE_OnScanSweep")
         {
-            if (Controller.Attack != null)
+            if (Controller != null || Controller.Attack != null)
                 Controller.Attack.TryHitTarget(Controller.Target, Controller.Stats.MeleeRange, Controller.Stats.AttackDamage);
+            Controller.TriggerAttackCoolDown();
         }
     }
 

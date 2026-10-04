@@ -19,6 +19,7 @@ public class ESMB_Shooting : EnemySMBase
     public override void OnAnimationEvent(string eventName)
     {
         if (eventName == "AE_OnShootFrame") SpawnProjectile();
+        Controller.TriggerAttackCoolDown();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
