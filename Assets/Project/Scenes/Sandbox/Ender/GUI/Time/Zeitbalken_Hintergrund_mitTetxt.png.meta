@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 60d102384a392744781e192be3800adb
+guid: 6b97319f378d188419d4f1c6da61d9ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5104534391698695225
-    second: GUI_ExpBG_0
+      213: 1853581601434392169
+    second: Zeitbalken_Hintergrund_mitTetxt_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GUI_ExpBG_0
+      name: Zeitbalken_Hintergrund_mitTetxt_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1758
-        height: 106
+        width: 1856
+        height: 331
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93427f8fbf2f6d640800000000000000
-      internalID: 5104534391698695225
+      spriteID: 96652b355ae39b910800000000000000
+      internalID: 1853581601434392169
       vertices: []
       indices: 
       edges: []
