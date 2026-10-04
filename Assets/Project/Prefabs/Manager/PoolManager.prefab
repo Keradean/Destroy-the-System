@@ -49,3 +49,11 @@ MonoBehaviour:
     prefab: {fileID: 4289308067542860465, guid: 27901be70e5c2944ea95e9b40ef72795, type: 3}
     prewarmCount: 100
     maxSize: 100
+  - label: Tracer
+    prefab: {fileID: 4202005733305121246, guid: 7eb8fdd912a386c4186cff416f79f213, type: 3}
+    prewarmCount: 100
+    maxSize: 100
+  - label: Projectile_Tracer
+    prefab: {fileID: 919132149155446097, guid: ae3170d1c7b12c84b805741d264c5f3c, type: 3}
+    prewarmCount: 100
+    maxSize: 100

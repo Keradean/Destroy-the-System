@@ -1,15 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Entities/Components/Shooting")]
 public class ShootingComponent : MonoBehaviour
 {
+    [Header("Configuration")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
 
-    public void Fire(Transform target, float damage)
-    {
-        if (projectilePrefab || target == null) return;
-        Vector3 dir = (target.position - firePoint.position).normalized;
-       //  GameObject projectile = //TODO OPBJECTPOOLING you moron, in current project it is set not this one yet
-        
-    }
+    public GameObject ProjectilePrefab => projectilePrefab;
+    public Transform FirePoint => firePoint != null ? firePoint : transform;
 }
