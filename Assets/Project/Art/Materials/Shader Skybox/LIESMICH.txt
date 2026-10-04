@@ -1,0 +1,53 @@
+LIESMICH – PlayerChar & Projectile (Unity-Paket)
+=================================================
+
+INHALT
+  PlayerChar.prefab            Spielfigur (Prefab Variant von PlayerChar.fbx)
+  PlayerChar_Animator          Zustände Idle (Start), Walk, Attack, Damage  – nur Vorführ-Kette Idle>Walk>Attack>Damage (endet in Damage),
+                               bitte durch echte Übergänge mit Parametern ersetzen
+  Projectile.prefab            Projektil (Prefab Variant von Projectile.fbx), Material Core
+  Projectile_Animator          Zustände Fly (Start), Impact                 – Übergänge noch NICHT verdrahtet
+  Core.mat, cubes.mat          URP/Lit – das Projekt braucht die Universal Render Pipeline
+
+CLIPS (24 fps)
+  Idle    4,13 s  Loop          Walk    4,17 s  Loop
+  Attack  2,46 s  einmalig      Damage  0,96 s  einmalig
+  Fly     1,00 s  Loop          Impact  0,63 s  einmalig
+  Attack und Damage beginnen und enden in der Idle-Startpose -> sauber zurück nach Idle.
+  Übergänge kurz halten (ca. 0,1 s), bei langen Überblendungen können Würfel kurz ineinander laufen.
+
+AUFBAU (kein Rig)
+  PlayerChar
+    PlayerChar_Core          Kugel, 12 Blend Shapes Spike_00…11 (in allen Clips animiert)
+    PlayerChar_Wuerfel_…     Mantel-Würfel
+    PlayerChar_Schweif_…     Schweif-Würfel (nur im Walk sichtbar)
+    PlayerChar_Muzzle        Spawn-Punkt des Projektils
+  Unsichtbare Würfel sind auf Scale 0 animiert (normal).
+  Unterobjekte nicht umbenennen/umhängen – die Clips finden sie über die Namen.
+  Dreiecke: Figur 3380 + Projektil 792 = 4172.
+
+BLICKRICHTUNG
+  Die Figur schaut in Unity nach -X. Soll vorne = +Z sein: Figur in ein leeres Parent legen und
+  die Figur darin um Y = 90° drehen.
+
+SCHUSS
+  Im Attack-Clip bei Frame 41 (1,667 s) das Projektil erzeugen (z. B. Animation Event auf dem Attack-Clip).
+  Position: PlayerChar_Muzzle.position
+  Rotation: die Rotation der FIGUR (PlayerChar.transform.rotation), NICHT die des Muzzle-Objekts.
+  Das Projektil fliegt dann in Blickrichtung der Figur (Ursprung = Mitte des Kerns, Schweif zeigt nach hinten).
+  Bewegung macht euer Code. Bei Treffer Impact abspielen und nach 0,63 s zerstören.
+
+DAMAGE-FARBE
+  Bei Damage soll die Emission des Cores kurz ROT werden (Frame 2 rot, ab Frame 10 zurück, Frame 20 normal).
+  Farb-Animationen kommen nicht aus Blender mit -> in Unity machen: im Damage-Clip bzw. per Code
+  Material._EmissionColor von PlayerChar_Core setzen. Die Farben ändern sich evtl. noch.
+
+ANIMATION EVENTS (in den Clip-Einstellungen der FBX, bleiben bei Re-Export erhalten)
+  Attack  Frame 1   AE_OnChargeStartFrame   Aufladen beginnt
+  Attack  Frame 41  AE_OnShootFrame         Projektil erzeugen + Schuss-Sound
+  Damage  Frame 2   AE_OnHitFlashFrame      Treffer-Sound, Core rot
+  Impact  Frame 1   AE_OnImpactStartFrame   Einschlag-Sound (Projektil)
+  Impact  Frame 16  AE_OnImpactEndFrame     Projektil zerstören
+  Ein Script auf dem jeweiligen Prefab-Root braucht öffentliche Methoden mit genau diesen Namen,
+  sonst meldet Unity beim Abspielen 'AnimationEvent has no receiver'.
+  In Blender stehen sie mit genau denselben Namen als Pose Markers in den Actions attack, damage, projectile_impact.
