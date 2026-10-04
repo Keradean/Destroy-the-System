@@ -15,6 +15,7 @@ namespace Project.Scripts.Philon.Levelup
         [SerializeField] PlayerSetup stats;
         [SerializeField] EXPHandler expHandler;
         [SerializeField] PlayerMoveComponent movement;
+        [SerializeField] PauseManager pauseManager;
 
         private int[] currentOptions = new int[3];
 
@@ -25,6 +26,7 @@ namespace Project.Scripts.Philon.Levelup
             //Pause Game
             GenerateOptions();
             LevelUpScreen.SetActive(true);
+            pauseManager.SetPause();
         }
 
         private void GenerateOptions()
@@ -99,6 +101,7 @@ namespace Project.Scripts.Philon.Levelup
             }
 
             LevelUpScreen.SetActive(false);
+            pauseManager.SetPause();
         }
     }
 }
