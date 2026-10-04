@@ -13,6 +13,7 @@ namespace Project.Scripts.Dennis.Player
         private void Awake()
         {
             GetComponent<HealthComponent>().Initialize(_data.maxHealth);
+            _data = Instantiate(_data); // Create a copy of the PlayerDataSO to avoid modifying the original asset
         }
     }
 }
