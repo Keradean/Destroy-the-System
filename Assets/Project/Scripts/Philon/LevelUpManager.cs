@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Project.Scripts.Dennis.Player;
 
 namespace Project.Scripts.Philon.Levelup
 {
@@ -10,6 +11,10 @@ namespace Project.Scripts.Philon.Levelup
         [SerializeField] Image[] currentImages = new Image[3];
 
         [SerializeField] List<Sprite> options;
+
+        [SerializeField] PlayerSetup stats;
+        [SerializeField] EXPHandler expHandler;
+        [SerializeField] PlayerMoveComponent movement;
 
         private int[] currentOptions = new int[3];
 
@@ -59,26 +64,34 @@ namespace Project.Scripts.Philon.Levelup
                 case 0:
                     // Upgrade 1 Attack Speed
                     Debug.Log("Upgrade 1 Attack Speed");
+                    stats.Data.attackSpeed *= 0.9f; // Example: Increase attack speed by 10%
                     break;
                 case 1:
                     // Upgrade 2 Collection Range
                     Debug.Log("Upgrade 2 Collection Range");
+                    stats.Data.pickupRange += 1f; // Example: Increase pickup range by 1 unit
+                    expHandler.SetPickupRange(stats.Data.pickupRange); // Update the pickup range in EXPHandler
                     break;
                 case 2:
                     // Upgrade 3 Damage
                     Debug.Log("Upgrade 3 Damage");
+                    stats.Data.projectileDamage += 5f; // Example: Increase projectile damage by 5
                     break;
                 case 3:
                     // Upgrade 4 Projectile
                     Debug.Log("Upgrade 4 Projectile");
+                    stats.Data.projectileCount += 1; // Example: Increase projectile count by 1
                     break;
                 case 4:
                     // Upgrade 5 Projectile Bounce
                     Debug.Log("Upgrade 5 Projectile Bounce");
+                    stats.Data.projectileBounces += 1; // Example: Increase projectile bounces by 1
                     break;
                 case 5:
                     // Upgrade 6 Speed
                     Debug.Log("Upgrade 6 Speed");
+                    stats.Data.moveSpeed += 0.5f; // Example: Increase move speed by 1 unit
+                    movement.SetMovespeed(stats.Data.moveSpeed); // Update the move speed in PlayerMoveComponent
                     break;
                 default:
                     Debug.LogError("Invalid upgrade option index: " + optionIndex);
