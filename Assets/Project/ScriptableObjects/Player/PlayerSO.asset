@@ -17,4 +17,7 @@ MonoBehaviour:
   attackInterval: 0.5
   attackSpeed: 3
   attackRange: 5
-  projectileDamage: 10
+  projectileDamage: 32
+  projectileCount: 1
+  projectileBounces: 0
+  pickupRange: 3
