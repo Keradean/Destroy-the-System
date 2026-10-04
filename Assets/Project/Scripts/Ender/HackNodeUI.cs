@@ -40,8 +40,6 @@ public class HackNodeUI : MonoBehaviour
         hackProgress.fillAmount = currentProgress;
     }
 
-    // Schließt diesen UI-Slot ab.
-    // Der Rahmen wird vollständig gefüllt und der Haken erscheint.
     public void CompleteHack()
     {
         if (isHacked)

@@ -15,10 +15,12 @@ namespace Project.Scripts.Philipp.Hacking
         [SerializeField] private float progress = 0f;
         [SerializeField] private bool isHacked = false;
         [SerializeField] private bool isPlayerInside = false;
+        
 
         #region Public Getters
         public bool IsHacked => isHacked;
         public bool IsPlayerInside => isPlayerInside;
+        public float HackProgress => Mathf.Clamp01(progress / hackingTime);
         #endregion
 
         #region Unity Callbacks
@@ -33,10 +35,7 @@ namespace Project.Scripts.Philipp.Hacking
             if (isHacked || !isPlayerInside) return;
 
             progress += Time.deltaTime;
-
-            // Dennis: ALARM steigt pro Sekunde Hacken
-            gameManager.AddAlarm(Time.deltaTime);
-
+            
             if (progress >= hackingTime)
             {
                 isHacked = true;
