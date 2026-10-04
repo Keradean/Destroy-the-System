@@ -17,5 +17,10 @@ namespace Project.Scripts.Dennis.Player
         public float attackSpeed = 1f;          // Abspieltempo der Attack-Animation, 2 = doppelt so schnell
         public float attackRange = 5f;
         public float projectileDamage = 10f;
+        public int projectileCount = 1;
+        public int projectileBounces = 0;
+
+        [Header("Pickup")]
+        public float pickupRange = 3f;
     }
 }

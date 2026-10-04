@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Audio;
 using Project.Scripts.Dennis.Game;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ namespace Project.Scripts.Dennis.Player
         private static readonly int DieStateHash = Animator.StringToHash("Die");
 
         [SerializeField] private GameManager _gameManager;
+
+        [Header("Sound")]
+        [SerializeField] private AudioEventChannel _audioChannel;
+        [SerializeField] private SoundData _damageSound;
 
         private HealthComponent _health;
         private Animator _animator;
@@ -53,6 +58,7 @@ namespace Project.Scripts.Dennis.Player
             if (tookDamage && !_health.IsDead)
             {
                 _animator.SetTrigger(DamageHash);
+                if (_audioChannel != null) _audioChannel.RaiseSFX(_damageSound, transform.position);
             }
         }
 

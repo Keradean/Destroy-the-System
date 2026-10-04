@@ -1,16 +1,25 @@
 using UnityEngine;
 
+[AddComponentMenu("Entities/Components/AttackComponent")]
 public class AttackComponent : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Settings")]
+    [SerializeField] private Transform attackPoint;
 
-    // Update is called once per frame
-    void Update()
+    public Transform AttackPoint => attackPoint != null ? attackPoint : transform;
+
+    public bool TryHitTarget(Transform target, float attackRange, float damage)
     {
-        
+        if (target == null) return false;
+        float distSqr = (target.position - AttackPoint.position).sqrMagnitude;
+        if (distSqr <= attackRange * attackRange)
+        {
+            if (target.TryGetComponent<HealthComponent>(out var heatlh))
+            {
+                heatlh.TakeDamage(damage);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Audio;
 using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
@@ -18,6 +19,10 @@ namespace Project.Scripts.Dennis.Player
         [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
         [SerializeField] private PoolManager _poolManager;   // leer lassen, wird dann in der Szene gesucht
 
+        [Header("Sound")]
+        [SerializeField] private AudioEventChannel _audioChannel;
+        [SerializeField] private SoundData _shootSound;
+
         private readonly Collider[] _hits = new Collider[64];
         private Animator _animator;
         private PlayerDataSO _data;
@@ -25,16 +30,17 @@ namespace Project.Scripts.Dennis.Player
         private bool _isAttacking;
         private bool _enteredAttackState;
         private float _timer;
+        private int _attackCount;
 
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
-            _data = GetComponent<PlayerSetup>().Data;
             if (_poolManager == null) _poolManager = FindAnyObjectByType<PoolManager>();
         }
 
         private void Start()
         {
+            _data = GetComponent<PlayerSetup>().Data;
             _animator.SetFloat(AttackSpeedHash, _data.attackSpeed);
         }
 
@@ -57,6 +63,7 @@ namespace Project.Scripts.Dennis.Player
             _target = nearest;
             _isAttacking = true;
             _timer = 0f;
+            _attackCount = _data.projectileCount;
 
             _animator.SetTrigger(AttackHash);
         }
@@ -73,12 +80,19 @@ namespace Project.Scripts.Dennis.Player
             // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
             Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
             GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
-            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _poolManager);
+            projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _data.projectileBounces, _enemyLayer, _poolManager);
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_shootSound, spawnPosition);
         }
 
         // Wird über AE_OnAttackEndFrame aufgerufen
         public void OnAttackFinished()
         {
+            if(_attackCount > 1)
+            {
+                _attackCount--;
+                _animator.SetTrigger(AttackHash);
+                return;
+            }
             _isAttacking = false;
             _enteredAttackState = false;
             _target = null;

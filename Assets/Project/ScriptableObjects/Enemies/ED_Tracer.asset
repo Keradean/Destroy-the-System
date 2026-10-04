@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6fa72cc8f0ed48428b8073e5d28e078, type: 3}
+  m_Name: ED_Tracer
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
+  enemyName: Tracer
+  type: 1
+  prefab: {fileID: 4202005733305121246, guid: 7eb8fdd912a386c4186cff416f79f213, type: 3}
+  xp: 15
+  baseHealth: 15
+  baseDamage: 1
+  meleeRange: 0
+  rangedRange: 8
+  attackCooldown: 2
+  hasSpecial: 0
+  specialRange: 0
+  specialCooldown: 0

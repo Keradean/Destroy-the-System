@@ -17,7 +17,15 @@ public class EnemyDataSO : ScriptableObject
     public GameObject prefab;
 
     [Header("Base Stats")]
+    public float xp;
     public float baseHealth;
     public float baseDamage;
-    public float attackRange;
+    public float meleeRange;
+    public float rangedRange;
+    public float attackCooldown;
+
+    [Header("Special Stats")]
+    public bool hasSpecial;
+    public float specialRange;
+    public float specialCooldown;
 }
