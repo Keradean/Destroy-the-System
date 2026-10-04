@@ -81,6 +81,7 @@ namespace Project.Scripts.Dennis.Player
             Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
             GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
             projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _data.projectileBounces, _enemyLayer, _poolManager);
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_shootSound, spawnPosition);
         }
 
         // Wird über AE_OnAttackEndFrame aufgerufen
