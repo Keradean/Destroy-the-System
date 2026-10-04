@@ -68,7 +68,7 @@ namespace Project.Scripts.Dennis.Player
             {
                 health.TakeDamage(_damage);
             }
-
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_hitSound, transform.position);
             if (CheckForBounce()) return;
             // TODO: später Impact-Animation abspielen, erst danach zurück in den Pool
             ReturnToPool();
