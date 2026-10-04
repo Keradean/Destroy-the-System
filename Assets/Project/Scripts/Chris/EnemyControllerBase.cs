@@ -28,6 +28,8 @@ public class EnemyControllerBase : MonoBehaviour
     public AttackComponent Attack { get; private set; }
     public SpawnerComponent Spawner { get; private set; }
 
+    [SerializeField] GameObject expPrefab;
+
 
     #region Internal
     private float nextAttackTime;
@@ -149,6 +151,10 @@ public class EnemyControllerBase : MonoBehaviour
     }
     private void HandleDeath()
     {
+        GameObject exp = Instantiate(expPrefab, transform.position, Quaternion.identity);
+        var expComponent = exp.GetComponent<PickupEXP>();
+        expComponent.SetExpAmount(Stats.XP);
+
         // Reward Player with XP
         if (PoolManager != null)
             PoolManager.Despawn(gameObject);
