@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6422555642117360532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 651133754127192923}
+  - component: {fileID: 4752021839285775278}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &651133754127192923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422555642117360532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4752021839285775278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422555642117360532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a5f84926661b44a88eb692ced7d583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  gameManager: {fileID: 0}
+  enemySpawners:
+  - {fileID: 0}
+  enemyPool:
+  - name: Scanner
+    enemyData: {fileID: 11400000, guid: 631b546479552894789a9478b9785d81, type: 2}
+    baseWeight: 50
+    minAlarmPercent: 0
+  - name: Tracer
+    enemyData: {fileID: 11400000, guid: feb29ae506fb2414281b383d791d10e0, type: 2}
+    baseWeight: 30
+    minAlarmPercent: 0.15
+  - name: Firewall
+    enemyData: {fileID: 11400000, guid: 82331c12808a16045a770eb3edbe7d90, type: 2}
+    baseWeight: 10
+    minAlarmPercent: 0.2
+  bossEnemyData: {fileID: 11400000, guid: b7e1f4f0cb300e243b7fdd449bc107b2, type: 2}
+  bossSpawnPoint: {fileID: 651133754127192923}
+  baseSpawnInterval: 8
+  minSpawnInterval: 2

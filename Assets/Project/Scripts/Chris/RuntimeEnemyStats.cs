@@ -10,6 +10,7 @@ public class RuntimeEnemyStats : MonoBehaviour
     public float MeleeRange { get; private set; }
     public float RangedRange { get; private set; }
     public float SpecialRange { get; private set; }
+    public float AttackCooldown { get; private set; }
     public float SpecialCooldown { get; private set; }
     public float XP { get; private set; }
     public bool IsSpecial { get; private set; }
@@ -22,6 +23,7 @@ public class RuntimeEnemyStats : MonoBehaviour
         MeleeRange = data.meleeRange;
         RangedRange = data.rangedRange;
         SpecialRange = data.specialRange;
+        AttackCooldown = data.attackCooldown;
         SpecialCooldown = data.specialCooldown;
         XP = data.xp * stageMultiplier;
         IsSpecial = data.hasSpecial;

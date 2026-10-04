@@ -11,8 +11,9 @@ namespace Project.Scripts.Dennis.Game
         public enum GameState { Playing, Won, Lost }
 
         [Header("ALARM")]
-        [SerializeField] private float _alarmPerSecond = 1f;    // Anstieg pro Sekunde Hacken
-        [SerializeField] private float _maxAlarm = 15f;         // 3 Hacks x 5 s HackingTime, später abstimmen
+        [SerializeField] private float _maxAlarm = 100f;          // Maximaler Alarmwert = 100 %
+        [SerializeField] private float _alarmPerSecond = 0.2778f; // Eine Danger-Stufe steigt alle 2 Minuten
+        [SerializeField] private float _alarmPerNode = 8.33f;     // Ein gehackter Node entspricht zusätzlich 30 Sekunden Alarm-Fortschritt
 
         [Header("Ablauf")]
         [SerializeField] private int _hacksForCore = 3;
@@ -28,6 +29,7 @@ namespace Project.Scripts.Dennis.Game
         public float MaxAlarm => _maxAlarm;
         public int HackedNodes => _hackedNodes;
         public bool IsCoreUnlocked => _hackedNodes >= _hacksForCore;
+        public MonoBehaviour ActiveHack => _activeHack;
 
         public event Action<float, float> OnAlarmChanged;   // aktuell, max
         public event Action<int, int> OnHacksChanged;       // gehackt, benötigt
@@ -41,14 +43,22 @@ namespace Project.Scripts.Dennis.Game
             // Falls die Szene nach Sieg oder Niederlage neu geladen wird
             Time.timeScale = 1f;
         }
+        
+        private void Update()
+        {
+            if (State != GameState.Playing)
+                return;
 
-        // Wird von HackNode jeden Frame beim Hacken aufgerufen, mit Time.deltaTime
-        public void AddAlarm(float hackSeconds)
+            AddAlarm(_alarmPerSecond * Time.deltaTime);
+        }
+
+        // Fügt dem aktuellen Alarmwert einen direkten Wert hinzu.
+        public void AddAlarm(float amount)
         {
             if (State != GameState.Playing) return;
             if (_alarm >= _maxAlarm) return;
 
-            _alarm = Mathf.Min(_alarm + hackSeconds * _alarmPerSecond, _maxAlarm);
+            _alarm = Mathf.Min(_alarm + amount, _maxAlarm);
             OnAlarmChanged?.Invoke(_alarm, _maxAlarm);
         }
 
@@ -72,6 +82,7 @@ namespace Project.Scripts.Dennis.Game
 
             bool wasUnlocked = IsCoreUnlocked;
             _hackedNodes++;
+            AddAlarm(_alarmPerNode);
             Debug.Log("Nodes gehackt: " + _hackedNodes + "/" + _hacksForCore);
             OnHacksChanged?.Invoke(_hackedNodes, _hacksForCore);
 
@@ -125,7 +136,7 @@ namespace Project.Scripts.Dennis.Game
         private void TestNodeHacked() => NodeHacked();
 
         [ContextMenu("Test: ALARM +5")]
-        private void TestAddAlarm() => AddAlarm(5f / _alarmPerSecond);
+        private void TestAddAlarm() => AddAlarm(5f);
 
         [ContextMenu("Test: Boss besiegt")]
         private void TestBossDefeated() => BossDefeated();

@@ -73,5 +73,10 @@ namespace Project.Scripts.Dennis.Player
             _targetNode = nextNode;
             transform.LookAt(nextNode.transform.position);
         }
+
+        public void SetMovespeed(float speed)
+        {
+            _moveSpeed = speed;
+        }
     }
 }

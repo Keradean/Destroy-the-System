@@ -171,14 +171,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000u
       curves: []
       events:
-      - time: 0.121212125
+      - time: 0.013201321
+        functionName: AE_OnChargeStartFrame
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.33243325
         functionName: AE_OnHitFrame
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2929293
+      - time: 0.9141914
         functionName: AE_OnAttackEndFrame
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -188,7 +195,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Damage
       takeName: ScannerEnemy
