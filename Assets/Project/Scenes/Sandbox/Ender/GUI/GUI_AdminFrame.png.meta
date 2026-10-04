@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 60d102384a392744781e192be3800adb
+guid: 7d7ea44c26e6dd44ca3731633a0f1f1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5104534391698695225
-    second: GUI_ExpBG_0
+      213: 5424281043249072232
+    second: Boss-Healthbar_Rahmen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GUI_ExpBG_0
+      name: Boss-Healthbar_Rahmen_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1758
-        height: 106
+        width: 2883
+        height: 431
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93427f8fbf2f6d640800000000000000
-      internalID: 5104534391698695225
+      spriteID: 8680fb8aedae64b40800000000000000
+      internalID: 5424281043249072232
       vertices: []
       indices: 
       edges: []

@@ -209,8 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ab31665edc5a2dd8814e03ffb3477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
-  _alarmPerSecond: 1
   _maxAlarm: 15
+  _alarmPerSecond: 1
+  _alarmPerNode: 8.33
   _hacksForCore: 3
   _endNode: {fileID: 1950624589}
 --- !u!4 &325852676
