@@ -7,6 +7,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(HealthComponent))]
 public class EnemyControllerBase : MonoBehaviour
 {
+    private static readonly int CanSpecialHash = Animator.StringToHash("CanSpecial");
+    private static readonly int InSpecialRangeHash = Animator.StringToHash("InSpecialRange");
+    private static readonly int CanAttackHash = Animator.StringToHash("CanAttack");
+    private static readonly int InRangedRangeHash = Animator.StringToHash("InRangedRange");
+    private static readonly int InMeleeRangeHash = Animator.StringToHash("InMeleeRange");
+    private static readonly int DistanceToTargetHash = Animator.StringToHash("DistanceToTarget");
+
     public NavMeshAgent Agent { get; private set; }
     public Animator Anim { get; private set; }
     public RuntimeEnemyStats Stats { get; private set; }
@@ -14,6 +21,7 @@ public class EnemyControllerBase : MonoBehaviour
     public Transform Target { get; private set; }
     public LayerMask TargetLayer { get; private set; }
     public PoolManager PoolManager { get; private set; }
+    public FXBridge FXBridge { get; private set; }
 
     //Optional Components
     public ShootingComponent Shooting { get; private set; }
@@ -22,7 +30,10 @@ public class EnemyControllerBase : MonoBehaviour
 
 
     #region Internal
+    private float nextAttackTime;
     private float nextSpecialTime;
+    private bool isMoving;
+    
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -32,7 +43,13 @@ public class EnemyControllerBase : MonoBehaviour
         Shooting = GetComponent<ShootingComponent>();
         Attack = GetComponent<AttackComponent>();
         Spawner = GetComponent<SpawnerComponent>();
+        FXBridge = GetComponent<FXBridge>();
 
+        if (Agent!= null)
+        {
+            Agent.updateRotation = false;
+            Agent.updatePosition = true;
+        }
         FindPlayer();
     }
     //TODO Enable and Disable after Components are written and wiring can begin
@@ -63,6 +80,7 @@ public class EnemyControllerBase : MonoBehaviour
         if (Target == null) FindPlayer();
         Stats.SetupStats(data, stageMultiplier);
         Health.Initialize(Stats.MaxHealth);
+        nextAttackTime = 0f;
         if (Agent != null)
         {
             Agent.enabled = true;
@@ -75,27 +93,54 @@ public class EnemyControllerBase : MonoBehaviour
             BindBehaviours();
             Anim.Update(0f);
         }
+        TriggerSpecialCooldown();
     }
     private void Update()
     {
         if (Target == null || Health.IsDead || Stats == null) return;
         if (Target == null) FindPlayer(); // just in case
+        RotateTowardsTarget();
+        HandleLocomotiveFX();
         float distance = Vector3.Distance(transform.position, Target.position);
-        Anim.SetFloat("DistanceToTarget", distance);
-        Anim.SetBool("InMeleeRange", distance <= Stats.MeleeRange);
-        Anim.SetBool("InRangedRange", distance <= Stats.RangedRange);
-
+        Anim.SetFloat(DistanceToTargetHash, distance);
+        Anim.SetBool(InMeleeRangeHash, distance <= Stats.MeleeRange);
+        Anim.SetBool(InRangedRangeHash, distance <= Stats.RangedRange);
+        bool canAttack = Time.time >= nextAttackTime;
+        Anim.SetBool(CanAttackHash, canAttack);
         if (Stats.IsSpecial)
         {
             bool canSpecial = Time.time >= nextSpecialTime;
-            Anim.SetBool("InSpecialRange", distance <= Stats.SpecialRange);
-            Anim.SetBool("CanSpecial", canSpecial);
+            Anim.SetBool(InSpecialRangeHash, distance <= Stats.SpecialRange);
+            Anim.SetBool(CanSpecialHash, canSpecial);
         }
     }
     #endregion
 
 
     #region Helpers
+    private void RotateTowardsTarget()
+    {
+        Vector3 lookDir = Vector3.zero;
+        if (Agent != null && Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f) lookDir = Agent.velocity.normalized;
+        else if (Target != null) lookDir = (Target.position - transform.position).normalized;
+        lookDir.y = 0;
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+        }
+    }
+    private void HandleLocomotiveFX()
+    {
+        if (Agent == null || FXBridge == null) return;
+        bool currentlyMoving = Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f;
+        if (currentlyMoving != isMoving)
+        {
+            isMoving = currentlyMoving;
+            if (isMoving) FXBridge.OnAnimationEvent("AE_OnMoveStart");
+            else FXBridge.OnAnimationEvent("AE_OnMoveStop");
+        }
+    }
     private void FindPlayer()
     {
         GameObject player = GameObject.FindWithTag("Player");
@@ -117,6 +162,10 @@ public class EnemyControllerBase : MonoBehaviour
         for (int i = 0; i < behaviours.Length; i++)
             behaviours[i].Initialize(this);
     }
+    public void TriggerAttackCoolDown()
+    {
+        nextAttackTime = Time.time + Stats.AttackCooldown;
+    }
     public void TriggerSpecialCooldown()
     {
         nextSpecialTime = Time.time + Stats.SpecialCooldown;
@@ -124,7 +173,7 @@ public class EnemyControllerBase : MonoBehaviour
     #endregion
 
 
-    #region Animation Events Obviously this entire region was written by AI. I think this is an appropriate use case for that shit
+    #region Animation Events        This entire region was written by AI. I think this is an appropriate use case for that shit
     /// <summary>
     /// ANIMATION EVENT RELAYS (Unity Engine Calls -> SMB Pipeline)
     /// All Unity Animation Events defined in the FBX files call these methods directly.
@@ -155,6 +204,8 @@ public class EnemyControllerBase : MonoBehaviour
     public void AE_OnScanSweep() => RelayAnimationEvent("AE_OnScanSweep");
     public void AE_OnTurn() => RelayAnimationEvent("AE_OnTurn");
     public void AE_OnStepFrame() => RelayAnimationEvent("AE_OnStepFrame");
+    public void AE_OnMoveStart() => RelayAnimationEvent("AE_OnMoveStart");
+    public void AE_OnMoveStop() => RelayAnimationEvent("AE_OnMoveStop");
 
     // --- BOSS SUMMON EVENTS ---
     public void AE_OnSummonStartFrame() => RelayAnimationEvent("AE_OnSummonStartFrame");
@@ -177,6 +228,7 @@ public class EnemyControllerBase : MonoBehaviour
         {
             behaviours[i].OnAnimationEvent(eventName);
         }
+        if (FXBridge != null) FXBridge.OnAnimationEvent(eventName);
     }
     #endregion
 }

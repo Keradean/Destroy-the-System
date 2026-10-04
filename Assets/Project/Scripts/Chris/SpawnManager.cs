@@ -4,25 +4,31 @@ using Project.Scripts.Dennis.Game;
 
 public class SpawnManager : MonoBehaviour
 {
-   [Header("Dependencies")]
-   [SerializeField] private GameManager gameManager;
-   [SerializeField] private List<EnemySpawner> enemySpawners = new();
+    [System.Serializable]
+    public struct EnemySpawnConfiguration
+    {
+        public string name;
+        public EnemyDataSO enemyData;
+        [Range(1, 100)] public int baseWeight;
+        [Range(0f, 1f)] public float minAlarmPercent;
+    }
 
-   [Header("Configurations")]
-   [SerializeField] private EnemyDataSO scannerEnemyData;
-   [SerializeField] private EnemyDataSO tracerEnemyData;
-   [SerializeField] private EnemyDataSO firewallEnemyData;
-   [SerializeField] private EnemyDataSO bossEnemyData;
+    [Header("Dependencies")]
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private List<EnemySpawner> enemySpawners = new();     
+    
+    [Header("Configurations")]
+    [SerializeField] private List<EnemySpawnConfiguration> enemyPool = new();
+    [SerializeField] private EnemyDataSO bossEnemyData;       
+    [SerializeField] private Transform bossSpawnPoint;     
+    
+    [Header("Wave/Alarm Settings")]
+    [SerializeField] private float baseSpawnInterval = 8.0f;
+    [SerializeField] private float minSpawnInterval = 2.0f;
+    private float spawnTimer;
+    private bool isBossSpawned;
 
-   [Header("Wave/Alarm Settings")]
-   [SerializeField] private float baseSpawnInterval = 8.0f;
-   [SerializeField] private float minSpawnInterval = 2.0f;
-   [SerializeField] private Transform bossSpawnPoint;
-
-   private float spawnTimer;
-   private bool isBossSpawned;
-
-    private void Start()
+    private void Awake()
     {
         if (gameManager == null) gameManager = FindAnyObjectByType<GameManager>();
     }
@@ -41,7 +47,7 @@ public class SpawnManager : MonoBehaviour
     }
     private void Update()
     {
-        if (gameManager != null || gameManager.State != GameManager.GameState.Playing) return;
+        if (gameManager == null || gameManager.State != GameManager.GameState.Playing) return;
         if (isBossSpawned) return;
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
@@ -52,17 +58,43 @@ public class SpawnManager : MonoBehaviour
     }
     private void TriggerSpawnWave()
     {
-        EnemySpawner selectedSpawner = enemySpawners[Random.Range(0, enemySpawners.Count)];
+        if (enemySpawners.Count == 0 || enemyPool.Count == 0) return;
         float alarmPercent = gameManager.MaxAlarm > 0 ? gameManager.Alarm / gameManager.MaxAlarm : 0f;
-        float stageMultiplier = 1.0f + (alarmPercent * 1.5f); // Needs adjustment maybe
-        EnemyDataSO enemyToSpawn = (alarmPercent > 0.4f && Random.value > 0.5f) ? scannerEnemyData : tracerEnemyData;
-        selectedSpawner.SpawnEnemy(enemyToSpawn,transform.position, stageMultiplier);
+        List<EnemySpawnConfiguration> validConfigs = new();
+        Debug.Log($"[SpawnManager] Current Alarm %: {alarmPercent:P0} | Valid Configs: {validConfigs.Count}/{enemyPool.Count}");
+        int totalWeight = 0;
+
+        foreach (var config in enemyPool)
+        {
+            if (config.enemyData == null) continue;
+            if (alarmPercent >= config.minAlarmPercent)
+            {
+                validConfigs.Add(config);
+                totalWeight += config.baseWeight;
+            }
+        }
+
+        if (validConfigs.Count == 0 || totalWeight <= 0) return;
+        int roll = Random.Range(0, totalWeight);
+        int currentSum = 0;
+        EnemySpawnConfiguration selectedConfig = validConfigs[0];
+        foreach (var config in validConfigs)
+        {
+            currentSum += config.baseWeight;
+            if (roll < currentSum)
+            {
+                selectedConfig = config;
+                break;
+            }
+        }
+        EnemySpawner selectedSpawner = enemySpawners[Random.Range(0, enemySpawners.Count)];
+        float stageMultiplier = 1.0f + (alarmPercent * 1.5f);
+        selectedSpawner.SpawnEnemyAtRandomPosition(selectedConfig.enemyData, stageMultiplier);
     }
     private void ResetTimer()
     {
         float alarmPercent = gameManager.MaxAlarm > 0 ? gameManager.Alarm / gameManager.MaxAlarm : 0f;
-        float currentInterval = Mathf.Lerp(baseSpawnInterval, minSpawnInterval, alarmPercent);
-        spawnTimer = currentInterval;
+        spawnTimer = Mathf.Lerp(baseSpawnInterval, minSpawnInterval, alarmPercent);
     }
     private void HandleAlarmChange(float currentAlarm, float maxAlarm)
     {
@@ -75,10 +107,6 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = bossSpawnPoint != null ? bossSpawnPoint.position : transform.position;
         GameObject bossGO = enemySpawners[0].SpawnEnemy(bossEnemyData, spawnPos, 2.0f);
         if (bossGO != null && bossGO.TryGetComponent<HealthComponent>(out HealthComponent health))
-            health.OnDeath += OnBossKilled;
+            health.OnDeath += () => gameManager?.BossDefeated();
     }
-    private void OnBossKilled()
-    {
-        if (gameManager != null) gameManager.BossDefeated();
-    } 
 }

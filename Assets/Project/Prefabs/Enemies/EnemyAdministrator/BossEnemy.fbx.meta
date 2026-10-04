@@ -59,7 +59,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Walk
       takeName: BossEnemy
@@ -88,7 +88,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Attack
       takeName: BossEnemy
@@ -293,7 +293,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4893617
+      - time: 0.34510744
         functionName: AE_OnSummonFrame
         data: 
         objectReferenceParameter: {instanceID: 0}
