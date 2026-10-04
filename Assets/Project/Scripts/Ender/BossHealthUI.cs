@@ -6,8 +6,8 @@ public class BossHealthUI : MonoBehaviour
     [SerializeField] private RectTransform bossHealthFill;
 
     [Header("Fill Positions")]
-    [SerializeField] private float fullPosX = -90.4f;
-    [SerializeField] private float emptyPosX = -712.4f;
+    [SerializeField] private float fullPosX = -102.8f;
+    [SerializeField] private float emptyPosX = -722.7f;
 
     private HealthComponent bossHealth;
 
