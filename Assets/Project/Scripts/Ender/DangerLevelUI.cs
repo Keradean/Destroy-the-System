@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Project.Scripts.Dennis.Game;
 
 public class DangerLevelUI : MonoBehaviour
 {
@@ -15,10 +16,8 @@ public class DangerLevelUI : MonoBehaviour
     [SerializeField] private Image dangerSkeletonLevel3;
     [SerializeField] private Image dangerSkeletonLevel4;
 
-    [Header("Danger Settings")]
-    [SerializeField] private float maxDanger = 100f;
-    [SerializeField] private float dangerPerSecond = 12.5f;
-    [SerializeField] private float dangerPerNode = 30f;
+    [Header("Game Manager")]
+    [SerializeField] private GameManager gameManager;
 
     [Header("Shake Settings")]
     [SerializeField] private float shakeStartPercent = 0.97f;
@@ -32,7 +31,7 @@ public class DangerLevelUI : MonoBehaviour
     [SerializeField] private float popDuration = 0.35f;
 
     private int currentStage = 0;
-    private float currentDanger = 0f;
+    private float currentFill = 0f;
 
     private RectTransform rectTransform;
     private Vector2 startPosition;
@@ -45,6 +44,19 @@ public class DangerLevelUI : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         startPosition = rectTransform.anchoredPosition;
         startScale = rectTransform.localScale;
+
+        if (!gameManager)
+        {
+            gameManager = FindAnyObjectByType<GameManager>();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (gameManager)
+        {
+            gameManager.OnAlarmChanged += HandleAlarmChanged;
+        }
     }
 
     private void Start()
@@ -52,82 +64,111 @@ public class DangerLevelUI : MonoBehaviour
         dangerLevelOrange.fillAmount = 0f;
         dangerLevelRed.fillAmount = 0f;
         dangerLevelPurple.fillAmount = 0f;
+
         SetSkeleton(1);
+
+        if (gameManager)
+        {
+            HandleAlarmChanged(
+                gameManager.Alarm,
+                gameManager.MaxAlarm
+            );
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (gameManager)
+        {
+            gameManager.OnAlarmChanged -= HandleAlarmChanged;
+        }
     }
 
     private void Update()
     {
-        if (currentStage >= 3)
-            return;
-
-        AddDanger(dangerPerSecond * Time.deltaTime);
-
-        UpdateCurrentStage();
         UpdateShake();
     }
 
-    public void AddDanger(float amount)
+    private void HandleAlarmChanged(float currentAlarm, float maxAlarm)
     {
-        if (currentStage >= 3)
+        if (maxAlarm <= 0f)
             return;
 
-        currentDanger += amount;
+        float alarmPercent = Mathf.Clamp01(currentAlarm / maxAlarm);
 
-        if (currentDanger >= maxDanger)
+        UpdateDangerDisplay(alarmPercent);
+    }
+
+    private void UpdateDangerDisplay(float alarmPercent)
+    {
+        int previousStage = currentStage;
+
+        float scaledProgress = alarmPercent * 3f;
+
+        if (alarmPercent >= 1f)
         {
-            currentDanger = maxDanger;
-            UpdateCurrentStage();
-            LevelUpDanger();
+            currentStage = 3;
+            currentFill = 1f;
         }
-    }
+        
+        else
+        {
+            currentStage = Mathf.FloorToInt(scaledProgress);
+            currentFill = scaledProgress - currentStage;
+        }
 
-    public void NodeHacked()
-    {
-        AddDanger(dangerPerNode);
-    }
+        dangerLevelOrange.fillAmount = 0f;
+        dangerLevelRed.fillAmount = 0f;
+        dangerLevelPurple.fillAmount = 0f;
 
-    private void LevelUpDanger()
-    {
-        currentStage++;
-        currentDanger = 0f;
+        switch (currentStage)
+        {
+            case 0: 
+                dangerLevelOrange.fillAmount = currentFill;
+                break;
 
-        rectTransform.anchoredPosition = startPosition;
+            case 1: 
+                dangerLevelOrange.fillAmount = 1f;
+                dangerLevelRed.fillAmount = currentFill;
+                break;
+
+            case 2: 
+                dangerLevelOrange.fillAmount = 1f;
+                dangerLevelRed.fillAmount = 1f;
+                dangerLevelPurple.fillAmount = currentFill;
+                break;
+
+            case 3:
+                dangerLevelOrange.fillAmount = 1f;
+                dangerLevelRed.fillAmount = 1f;
+                dangerLevelPurple.fillAmount = 1f;
+                break;
+        }
+
         SetSkeleton(currentStage + 1);
 
-        if (!isPopping)
+        if (currentStage > previousStage && !isPopping)
         {
             StartCoroutine(LevelUpPop());
         }
     }
 
-    private void UpdateCurrentStage()
-    {
-        float dangerPercent = Mathf.Clamp01(currentDanger / maxDanger);
-
-        switch (currentStage)
-        {
-            case 0: dangerLevelOrange.fillAmount = dangerPercent;
-                break;
-
-            case 1: dangerLevelRed.fillAmount = dangerPercent;
-                break;
-
-            case 2: dangerLevelPurple.fillAmount = dangerPercent;
-                break;
-        }
-    }
-
     private void UpdateShake()
     {
-        float dangerPercent = Mathf.Clamp01(currentDanger / maxDanger);
-
-        if (dangerPercent < shakeStartPercent || isPopping)
+        if (currentStage >= 3)
         {
             rectTransform.anchoredPosition = startPosition;
             return;
         }
 
-        float shakeProgress = Mathf.InverseLerp(shakeStartPercent, 1f, dangerPercent);
+        if (currentFill < shakeStartPercent || isPopping)
+        {
+            rectTransform.anchoredPosition = startPosition;
+
+            return;
+        }
+
+        float shakeProgress = Mathf.InverseLerp(shakeStartPercent, 1f, currentFill);
         float strength = Mathf.Lerp(minShakeStrength, maxShakeStrength, shakeProgress);
         float speed = Mathf.Lerp(minShakeSpeed, maxShakeSpeed, shakeProgress);
         float x = Mathf.Sin(Time.time * speed) * strength;
@@ -148,8 +189,9 @@ public class DangerLevelUI : MonoBehaviour
             timer += Time.deltaTime;
             float t = Mathf.Clamp01(timer / popDuration);
             float easedT = t * t * t;
-            rectTransform.localScale = Vector3.Lerp(startScale, targetScale, easedT);
 
+            rectTransform.localScale = Vector3.Lerp(startScale, targetScale, easedT);
+            
             yield return null;
         }
 
@@ -158,6 +200,7 @@ public class DangerLevelUI : MonoBehaviour
         while (timer < popDuration)
         {
             timer += Time.deltaTime;
+
             float t = Mathf.Clamp01(timer / popDuration);
             float easedT = 1f - Mathf.Pow(1f - t, 3f);
             rectTransform.localScale = Vector3.Lerp(targetScale, startScale, easedT);
@@ -166,6 +209,7 @@ public class DangerLevelUI : MonoBehaviour
         }
 
         rectTransform.localScale = startScale;
+
         isPopping = false;
     }
 
@@ -175,15 +219,5 @@ public class DangerLevelUI : MonoBehaviour
         dangerSkeletonLevel2.enabled = level == 2;
         dangerSkeletonLevel3.enabled = level == 3;
         dangerSkeletonLevel4.enabled = level == 4;
-    }
-
-    public int GetDangerLevel()
-    {
-        return currentStage + 1;
-    }
-
-    public float GetCurrentDanger()
-    {
-        return currentDanger;
     }
 }

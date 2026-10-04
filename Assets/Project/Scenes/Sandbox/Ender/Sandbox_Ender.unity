@@ -525,13 +525,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 491722690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704e169caeded484992ffd9d7755b63f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7918f2575ba9b3e4f9c63faa777def00, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HackNodesManager1
+  m_EditorClassIdentifier: Assembly-CSharp::HackNodesUI
   hackSlot1: {fileID: 1012624708}
   hackSlot2: {fileID: 1375595163}
   hackSlot3: {fileID: 1277583937}
-  dangerLevelUI: {fileID: 1867876106}
+  gameManager: {fileID: 0}
 --- !u!1 &558026233
 GameObject:
   m_ObjectHideFlags: 0
