@@ -293,8 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ab31665edc5a2dd8814e03ffb3477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
-  _alarmPerSecond: 1
   _maxAlarm: 15
+  _alarmPerSecond: 1
+  _alarmPerNode: 8.33
   _hacksForCore: 3
   _endNode: {fileID: 1950624589}
 --- !u!4 &325852676
@@ -619,6 +620,7 @@ MonoBehaviour:
   _maxAttackDuration: 3
   _projectilePrefab: {fileID: 7499574660123265241, guid: f4efd7abd7fbfb9429f19e2e9d0ed43b, type: 3}
   _spawnOffset: {x: 0, y: 0.5, z: 0.5}
+  _poolManager: {fileID: 0}
 --- !u!114 &1043527612
 MonoBehaviour:
   m_ObjectHideFlags: 0
