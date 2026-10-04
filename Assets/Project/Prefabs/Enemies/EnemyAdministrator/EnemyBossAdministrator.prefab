@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31b3b5b35f47e24199794e86dca4383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControllerBase
+  expPrefab: {fileID: 5989174473946277568, guid: 0a49b26321ed4d9419dd8d02ba8796bf, type: 3}
 --- !u!136 &4430827457727058750
 CapsuleCollider:
   m_ObjectHideFlags: 0
