@@ -1,3 +1,4 @@
+using Project.Scripts.Dennis.Audio;
 using UnityEngine;
 
 namespace Project.Scripts.Dennis.Player
@@ -17,6 +18,10 @@ namespace Project.Scripts.Dennis.Player
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
         [SerializeField] private PoolManager _poolManager;   // leer lassen, wird dann in der Szene gesucht
+
+        [Header("Sound")]
+        [SerializeField] private AudioEventChannel _audioChannel;
+        [SerializeField] private SoundData _shootSound;
 
         private readonly Collider[] _hits = new Collider[64];
         private Animator _animator;
@@ -74,6 +79,8 @@ namespace Project.Scripts.Dennis.Player
             Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
             GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
             projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _poolManager);
+
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_shootSound, spawnPosition);
         }
 
         // Wird über AE_OnAttackEndFrame aufgerufen
