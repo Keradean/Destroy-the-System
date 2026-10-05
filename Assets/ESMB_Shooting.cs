@@ -50,11 +50,12 @@ public class ESMB_Shooting : EnemySMBase
 
         var shootingComponent = Controller.Shooting;
         if (shootingComponent == null || shootingComponent.ProjectilePrefab == null) return;
+        if (Controller.PoolManager == null) return; // Dennis
 
         Vector3 spawnPos = shootingComponent.FirePoint.position;
         Quaternion rotation = Quaternion.LookRotation(Controller.Target.position - spawnPos);
         GameObject projectile = Controller.PoolManager.Spawn(shootingComponent.ProjectilePrefab, spawnPos, rotation);
-        if (projectile != projectile.TryGetComponent<EnemyProjectile>(out var p))
+        if (projectile != null && projectile.TryGetComponent<EnemyProjectile>(out var p)) // Dennis
         {
             p.Initialize(Controller.Stats.AttackDamage, Controller.PoolManager, Controller.TargetLayer);
         }

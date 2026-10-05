@@ -34,13 +34,13 @@ public class SpawnManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (gameManager != null)
+        if (gameManager == null) return; // Dennis
         gameManager.OnAlarmChanged += HandleAlarmChange;
         gameManager.OnCoreReached += HandleCoreBreach;
     }
     private void OnDisable()
     {
-        if (gameManager != null)
+        if (gameManager == null) return; // Dennis
         gameManager.OnAlarmChanged -= HandleAlarmChange;
         gameManager.OnCoreReached -= HandleCoreBreach;
 
@@ -98,11 +98,12 @@ public class SpawnManager : MonoBehaviour
     }
     private void HandleAlarmChange(float currentAlarm, float maxAlarm)
     {
-        ResetTimer();
+        float alarmPercent = maxAlarm > 0 ? currentAlarm / maxAlarm : 0f; // Dennis
+        spawnTimer = Mathf.Min(spawnTimer, Mathf.Lerp(baseSpawnInterval, minSpawnInterval, alarmPercent)); // Dennis
     }
     private void HandleCoreBreach()
     {
-        if (isBossSpawned || bossEnemyData == null) return;
+        if (isBossSpawned || bossEnemyData == null || enemySpawners.Count == 0) return; // Dennis
         isBossSpawned = true;
         Vector3 spawnPos = bossSpawnPoint != null ? bossSpawnPoint.position : transform.position;
         GameObject bossGO = enemySpawners[0].SpawnEnemy(bossEnemyData, spawnPos, 2.0f);

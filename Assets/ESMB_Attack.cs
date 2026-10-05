@@ -26,8 +26,8 @@ public class ESMB_Attack : EnemySMBase
     {
         if (eventName == "AE_OnHitFrame" || eventName == "AE_OnScanSweep")
         {
-            if (Controller != null || Controller.Attack != null)
-                Controller.Attack.TryHitTarget(Controller.Target, Controller.Stats.MeleeRange, Controller.Stats.AttackDamage);
+            if (Controller == null || Controller.Attack == null) return; // Dennis
+            Controller.Attack.TryHitTarget(Controller.Target, Controller.Stats.MeleeRange, Controller.Stats.AttackDamage);
             Controller.TriggerAttackCoolDown();
         }
     }

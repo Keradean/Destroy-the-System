@@ -16,7 +16,8 @@ namespace Project.Scripts.Dennis.Player
 
         [Header("Projektil")]
         [SerializeField] private GameObject _projectilePrefab;
-        [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // etwas höher und vor dem Player
+        [SerializeField] private Vector3 _spawnOffset = new Vector3(0f, 0.5f, 0.5f);   // y = Höhe, z = Abstand in Richtung Ziel
+        [SerializeField] private float _turnSpeed = 10f;   // wie schnell sich der Player im Stand zum Ziel dreht
         [SerializeField] private PoolManager _poolManager;   // leer lassen, wird dann in der Szene gesucht
 
         [Header("Sound")]
@@ -25,6 +26,7 @@ namespace Project.Scripts.Dennis.Player
 
         private readonly Collider[] _hits = new Collider[64];
         private Animator _animator;
+        private PlayerMoveComponent _move;
         private PlayerDataSO _data;
         private Collider _target;
         private bool _isAttacking;
@@ -35,6 +37,7 @@ namespace Project.Scripts.Dennis.Player
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
+            _move = GetComponent<PlayerMoveComponent>();
             if (_poolManager == null) _poolManager = FindAnyObjectByType<PoolManager>();
         }
 
@@ -50,6 +53,7 @@ namespace Project.Scripts.Dennis.Player
 
             if (_isAttacking)
             {
+                FaceTarget();
                 CheckAttackStateLeft();
                 if (_isAttacking && _timer >= _maxAttackDuration) OnAttackFinished();
                 return;
@@ -77,8 +81,8 @@ namespace Project.Scripts.Dennis.Player
             if (!IsValidTarget(_target)) _target = FindNearestEnemy();
             if (_target == null) return;
 
-            // Offset gilt relativ zum Player, z vorne heißt also immer in Blickrichtung
-            Vector3 spawnPosition = transform.TransformPoint(_spawnOffset);
+            // Startpunkt liegt in Richtung Ziel, nicht in Blickrichtung. Beim Laufen schaut der Player ja zum nächsten Node.
+            Vector3 spawnPosition = transform.position + Vector3.up * _spawnOffset.y + GetFlatDirection(_target) * _spawnOffset.z;
             GameObject projectile = _poolManager.Spawn(_projectilePrefab, spawnPosition, Quaternion.identity);
             projectile.GetComponent<PlayerProjectile>().Launch(_target, _data.projectileDamage, _data.projectileBounces, _enemyLayer, _poolManager);
             if (_audioChannel != null) _audioChannel.RaiseSFX(_shootSound, spawnPosition);
@@ -107,6 +111,27 @@ namespace Project.Scripts.Dennis.Player
 
             if (inAttack) _enteredAttackState = true;
             else if (_enteredAttackState) OnAttackFinished();
+        }
+
+        // Im Stand zum Ziel drehen. Beim Laufen nicht, sonst läuft der Player seitwärts.
+        private void FaceTarget()
+        {
+            if (_move != null && _move.IsMoving) return;
+            if (!IsValidTarget(_target)) return;
+
+            Vector3 direction = GetFlatDirection(_target);
+            if (direction == Vector3.zero) return;
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _turnSpeed * Time.deltaTime);
+        }
+
+        // Richtung zum Ziel ohne Höhe, damit sich der Player nicht nach oben oder unten neigt
+        private Vector3 GetFlatDirection(Collider target)
+        {
+            Vector3 direction = target.bounds.center - transform.position;
+            direction.y = 0f;
+            return direction.normalized;
         }
 
         private Collider FindNearestEnemy()

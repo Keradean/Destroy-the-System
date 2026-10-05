@@ -35,7 +35,7 @@ public class EnemyControllerBase : MonoBehaviour
     private float nextAttackTime;
     private float nextSpecialTime;
     private bool isMoving;
-    
+
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -88,6 +88,7 @@ public class EnemyControllerBase : MonoBehaviour
             Agent.enabled = true;
             Agent.Warp(validPosition);
             Agent.isStopped = false;
+            if (Stats.MeleeRange > 0f && Agent.stoppingDistance >= Stats.MeleeRange) Agent.stoppingDistance = Stats.MeleeRange * 0.8f; // Dennis
         }
         if (Anim != null)
         {
@@ -99,8 +100,8 @@ public class EnemyControllerBase : MonoBehaviour
     }
     private void Update()
     {
+        if (Target == null) FindPlayer(); // Dennis
         if (Target == null || Health.IsDead || Stats == null) return;
-        if (Target == null) FindPlayer(); // just in case
         RotateTowardsTarget();
         HandleLocomotiveFX();
         float distance = Vector3.Distance(transform.position, Target.position);
@@ -146,14 +147,17 @@ public class EnemyControllerBase : MonoBehaviour
     private void FindPlayer()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        if (player != null) Target = player.transform;
-        TargetLayer = player.layer;
+        if (player == null) return; // Dennis
+        Target = player.transform;
+        TargetLayer = 1 << player.layer; // Dennis
     }
     private void HandleDeath()
     {
-        GameObject exp = Instantiate(expPrefab, transform.position, Quaternion.identity);
-        var expComponent = exp.GetComponent<PickupEXP>();
-        expComponent.SetExpAmount(Stats.XP);
+        if (expPrefab != null) // Dennis
+        {
+            GameObject exp = Instantiate(expPrefab, transform.position, Quaternion.identity);
+            if (exp.TryGetComponent(out PickupEXP expComponent)) expComponent.SetExpAmount(Stats.XP); // Dennis
+        }
 
         // Reward Player with XP
         if (PoolManager != null)
