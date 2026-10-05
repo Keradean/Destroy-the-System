@@ -15,10 +15,15 @@ namespace Project.Scripts.Philon.Levelup
         [SerializeField] PlayerSetup stats;
         [SerializeField] EXPHandler expHandler;
         [SerializeField] PlayerMoveComponent movement;
+        [SerializeField] PlayerAttack attack;
         [SerializeField] PauseManager pauseManager;
 
         private int[] currentOptions = new int[3];
 
+        private void Start()
+        {
+            if(attack == null) attack = movement.GetComponent<PlayerAttack>();
+        }
 
         [ContextMenu("Level Up")]
         public void LevelUp()
@@ -67,6 +72,7 @@ namespace Project.Scripts.Philon.Levelup
                     // Upgrade 1 Attack Speed
                     Debug.Log("Upgrade 1 Attack Speed");
                     stats.Data.attackSpeed *= 0.9f; // Example: Increase attack speed by 10%
+                    attack.UpdateAttackSpeed(); // Update the attack speed in PlayerAttack
                     break;
                 case 1:
                     // Upgrade 2 Collection Range

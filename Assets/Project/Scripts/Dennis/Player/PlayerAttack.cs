@@ -47,6 +47,11 @@ namespace Project.Scripts.Dennis.Player
             _animator.SetFloat(AttackSpeedHash, _data.attackSpeed);
         }
 
+        public void UpdateAttackSpeed()
+        {
+            _animator.SetFloat(AttackSpeedHash, _data.attackSpeed);
+        }
+
         private void Update()
         {
             _timer += Time.deltaTime;
