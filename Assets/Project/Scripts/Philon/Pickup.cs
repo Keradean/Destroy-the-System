@@ -8,11 +8,13 @@ public abstract class Pickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (isPickedUp) return; // Dennis
+        EXPHandler handler = other.GetComponentInParent<EXPHandler>(); // Dennis
+        if (handler != null) // Dennis
         {
             Debug.Log("Player entered pickup range");
             isPickedUp = true;
-            target = other.transform;
+            target = handler.transform; // Dennis
         }
     }
 

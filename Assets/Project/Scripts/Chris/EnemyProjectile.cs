@@ -21,6 +21,9 @@ public class EnemyProjectile : MonoBehaviour
     {
         collider = GetComponent<Collider>();
         collider.isTrigger = true;
+        if (!TryGetComponent(out Rigidbody body)) body = gameObject.AddComponent<Rigidbody>(); // Dennis
+        body.isKinematic = true; // Dennis
+        body.useGravity = false; // Dennis
     }
     private void OnEnable()
     {
