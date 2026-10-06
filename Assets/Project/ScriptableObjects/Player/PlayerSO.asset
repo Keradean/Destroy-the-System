@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19196582935ce93f49f95bee8a17bfa7, type: 3}
   m_Name: PlayerSO
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerDataSO
-  maxHealth: 100
+  maxHealth: 200
   moveSpeed: 6.5
   attackInterval: 0.5
   attackSpeed: 3

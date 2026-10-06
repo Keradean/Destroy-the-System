@@ -3,6 +3,7 @@ using UnityEngine;
 public class BossHealthUI : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private GameObject bossHealthRoot;
     [SerializeField] private RectTransform bossHealthFill;
 
     [Header("Fill Positions")]
@@ -11,11 +12,20 @@ public class BossHealthUI : MonoBehaviour
 
     private HealthComponent bossHealth;
 
+    private void Awake()
+    {
+        if (bossHealthRoot)
+        {
+            bossHealthRoot.SetActive(false);
+        }
+    }
+
     private void OnDisable()
     {
         if (bossHealth)
         {
             bossHealth.OnHealthChanged -= SetHealth;
+            bossHealth.OnDeath -= HideBossHealth;
         }
     }
 
@@ -24,6 +34,7 @@ public class BossHealthUI : MonoBehaviour
         if (bossHealth)
         {
             bossHealth.OnHealthChanged -= SetHealth;
+            bossHealth.OnDeath -= HideBossHealth;
         }
 
         bossHealth = health;
@@ -31,7 +42,14 @@ public class BossHealthUI : MonoBehaviour
         if (!bossHealth)
             return;
 
+        if (bossHealthRoot)
+        {
+            bossHealthRoot.SetActive(true);
+        }
+
         bossHealth.OnHealthChanged += SetHealth;
+        bossHealth.OnDeath += HideBossHealth;
+
         SetHealth(bossHealth.CurrentHealth, bossHealth.MaxHealth);
     }
 
@@ -47,5 +65,13 @@ public class BossHealthUI : MonoBehaviour
         Vector2 position = bossHealthFill.anchoredPosition;
         position.x = newPosX;
         bossHealthFill.anchoredPosition = position;
+    }
+
+    private void HideBossHealth()
+    {
+        if (bossHealthRoot)
+        {
+            bossHealthRoot.SetActive(false);
+        }
     }
 }

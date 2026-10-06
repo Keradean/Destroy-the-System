@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -46,7 +47,8 @@ public class PauseManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void OnPause(InputAction.CallbackContext context)
