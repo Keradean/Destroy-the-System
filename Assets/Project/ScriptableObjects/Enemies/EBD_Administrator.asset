@@ -15,12 +15,18 @@ MonoBehaviour:
   enemyName: Administrator
   type: 3
   prefab: {fileID: 2921150542361447948, guid: 3b9116d9aaebbb84290556a2f27767ef, type: 3}
+<<<<<<< Updated upstream
   xp: 1000
   baseHealth: 64
   baseDamage: 5
+=======
+  xp: 300
+  baseHealth: 100
+  baseDamage: 1.5
+>>>>>>> Stashed changes
   meleeRange: 0
-  rangedRange: 24
-  attackCooldown: 4
+  rangedRange: 18
+  attackCooldown: 6
   hasSpecial: 1
   specialRange: 80
   specialCooldown: 20

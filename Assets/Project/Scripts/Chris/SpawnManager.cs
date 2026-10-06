@@ -22,6 +22,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private EnemyDataSO bossEnemyData;       
     [SerializeField] private Transform bossSpawnPoint;     
     
+    [Header("Boss UI")]
+    [SerializeField] private BossHealthUI bossHealthUI;
+    
     [Header("Wave/Alarm Settings")]
     [SerializeField] private float baseSpawnInterval = 8.0f;
     [SerializeField] private float minSpawnInterval = 2.0f;
@@ -88,7 +91,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
         EnemySpawner selectedSpawner = enemySpawners[Random.Range(0, enemySpawners.Count)];
-        float stageMultiplier = 1.0f + (alarmPercent * 1.5f);
+        float stageMultiplier = 3.0f + (alarmPercent * 1.5f);
         selectedSpawner.SpawnEnemyAtRandomPosition(selectedConfig.enemyData, stageMultiplier);
     }
     private void ResetTimer()
@@ -107,6 +110,13 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = bossSpawnPoint != null ? bossSpawnPoint.position : transform.position;
         GameObject bossGO = enemySpawners[0].SpawnEnemy(bossEnemyData, spawnPos, 2.0f);
         if (bossGO != null && bossGO.TryGetComponent<HealthComponent>(out HealthComponent health))
+        {
             health.OnDeath += () => gameManager?.BossDefeated();
+
+            if (bossHealthUI)
+            {
+                bossHealthUI.SetBoss(health);
+            }
+        }
     }
 }

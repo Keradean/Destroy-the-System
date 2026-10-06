@@ -69,10 +69,7 @@ public class DangerLevelUI : MonoBehaviour
 
         if (gameManager)
         {
-            HandleAlarmChanged(
-                gameManager.Alarm,
-                gameManager.MaxAlarm
-            );
+            HandleAlarmChanged(gameManager.Alarm, gameManager.MaxAlarm);
         }
     }
 
