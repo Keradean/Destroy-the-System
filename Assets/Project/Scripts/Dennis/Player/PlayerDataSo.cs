@@ -7,7 +7,7 @@ namespace Project.Scripts.Dennis.Player
     public class PlayerDataSO : ScriptableObject
     {
         [Header("Leben")]
-        public float maxHealth = 100f;
+        public float maxHealth = 200f;
 
         [Header("Bewegung")]
         public float moveSpeed = 6.5f;

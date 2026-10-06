@@ -10,7 +10,7 @@ namespace Project.Scripts.Philipp.Hacking
         [Header("Dependencies")]
         [SerializeField] private GameManager gameManager;   // Dennis: GameManager existiert jetzt
         [Header("Settings")]
-        [SerializeField] private float hackingTime = 5f;
+        [SerializeField] private float hackingTime = 15f;
 
         // Dennis: Sounds, am besten einmal im HackNode-Prefab eintragen
         [Header("Sound")]
