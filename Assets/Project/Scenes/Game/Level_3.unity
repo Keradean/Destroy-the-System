@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.LevelLoader
   _gameManager: {fileID: 0}
-  _nextSceneName: Level_3
+  _nextSceneName: Level_4
   _lastLevelSceneName: 
   _autoLoad: 1
   _winDelay: 3

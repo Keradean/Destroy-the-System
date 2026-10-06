@@ -71,7 +71,7 @@ namespace Project.Scripts.Philon.Levelup
                 case 0:
                     // Upgrade 1 Attack Speed
                     Debug.Log("Upgrade 1 Attack Speed");
-                    stats.Data.attackSpeed *= 0.9f; // Example: Increase attack speed by 10%
+                    stats.Data.attackSpeed *= 1.1f; // Example: Increase attack speed by 10%
                     attack.UpdateAttackSpeed(); // Update the attack speed in PlayerAttack
                     break;
                 case 1:
