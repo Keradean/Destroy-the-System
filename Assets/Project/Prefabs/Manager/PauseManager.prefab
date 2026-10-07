@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pausePanel:
   - {fileID: 0}
+  - {fileID: 0}
   pauseAction: {fileID: 835001020081201911, guid: 231a1d7b6366137a184a28a875dc0e8a, type: 3}
