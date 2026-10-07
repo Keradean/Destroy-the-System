@@ -173,7 +173,7 @@ MonoBehaviour:
   left: {fileID: 0}
   right: {fileID: 0}
   gameManager: {fileID: 0}
-  hackingTime: 5
+  hackingTime: 15
   audioChannel: {fileID: 0}
   hackStartSound: {fileID: 0}
   hackCompleteSound: {fileID: 0}

@@ -16,11 +16,17 @@ MonoBehaviour:
   type: 3
   prefab: {fileID: 2921150542361447948, guid: 3b9116d9aaebbb84290556a2f27767ef, type: 3}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   xp: 1000
   baseHealth: 64
   baseDamage: 5
 =======
   xp: 300
+  baseHealth: 100
+  baseDamage: 1.5
+>>>>>>> Stashed changes
+=======
+  xp: 50
   baseHealth: 100
   baseDamage: 1.5
 >>>>>>> Stashed changes

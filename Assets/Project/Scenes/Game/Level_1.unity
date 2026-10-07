@@ -779,7 +779,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerSetup
 --- !u!114 &452904327 stripped
 MonoBehaviour:
+<<<<<<< Updated upstream
   m_CorrespondingSourceObject: {fileID: 8647906970862282975, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+=======
+  m_CorrespondingSourceObject: {fileID: 7109948909563035929, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 1189979615}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -790,7 +794,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &452904328 stripped
 MonoBehaviour:
+<<<<<<< Updated upstream
   m_CorrespondingSourceObject: {fileID: 537806130540572726, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+=======
+  m_CorrespondingSourceObject: {fileID: 2152367254347799024, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 1189979615}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -801,7 +809,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &452904329 stripped
 MonoBehaviour:
+<<<<<<< Updated upstream
   m_CorrespondingSourceObject: {fileID: 8125624343375532333, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+=======
+  m_CorrespondingSourceObject: {fileID: 7668522988481476843, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 1189979615}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -812,7 +824,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &452904330 stripped
 GameObject:
+<<<<<<< Updated upstream
   m_CorrespondingSourceObject: {fileID: 1414417986289339711, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+=======
+  m_CorrespondingSourceObject: {fileID: 651070195150071033, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+>>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 1189979615}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &467985662
@@ -957,6 +973,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &561006147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2359123267490263524, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+  m_PrefabInstance: {fileID: 1189979615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1297dc6dceda664d9e14fc5524cda1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealthUI
 --- !u!1 &580641501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1033,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   serializedVersion: 6
   m_Component:
   - component: {fileID: 689283479}
@@ -1024,10 +1052,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689283477}
+=======
+  m_GameObject: {fileID: 0}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ab31665edc5a2dd8814e03ffb3477e, type: 3}
   m_Name: 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Project/Scenes/Game/Level _1.unity
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
   _maxAlarm: 15
@@ -1059,6 +1091,14 @@ Transform:
   _winDelay: 3
   _loseDelay: 3
 >>>>>>> Stashed changes:Assets/Project/Scenes/Game/Level_1.unity
+=======
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
+--- !u!4 &689283479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1060777249449157324, guid: ed7310448c59f09489c5883ef9582f6e, type: 3}
+  m_PrefabInstance: {fileID: 896976202604658316}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &710604355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,6 +1647,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1572015671}
     m_Modifications:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Project/Scenes/Game/Level _1.unity
     - target: {fileID: 536426409835629063, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: gameManager
@@ -1664,12 +1705,28 @@ PrefabInstance:
     - target: {fileID: 2312376325529751182, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+=======
+    - target: {fileID: 2312376325529751182, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 345657306}
+    - target: {fileID: 3462375532097603680, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+>>>>>>> Stashed changes
       objectReference: {fileID: 345657306}
     - target: {fileID: 4193071754643754791, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 345657306}
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes:Assets/Project/Scenes/Game/Level_1.unity
+=======
+    - target: {fileID: 4789168810087316100, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 877671588}
+>>>>>>> Stashed changes
     - target: {fileID: 6234217509888598786, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1750,6 +1807,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Project/Scenes/Game/Level _1.unity
 =======
     - target: {fileID: 6403730431448109890, guid: feaa738c883746049b5a136a62915aa2, type: 3}
@@ -1757,6 +1815,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 877671588}
 >>>>>>> Stashed changes:Assets/Project/Scenes/Game/Level_1.unity
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 6423681414952391611, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: gameManager
       value: 
@@ -1769,6 +1829,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:Assets/Project/Scenes/Game/Level _1.unity
     - target: {fileID: 7276711462957657498, guid: feaa738c883746049b5a136a62915aa2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1821,6 +1882,19 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
 >>>>>>> Stashed changes:Assets/Project/Scenes/Game/Level_1.unity
+=======
+    - target: {fileID: 7786058338429614094, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 877671588}
+    - target: {fileID: 8678926428942091839, guid: feaa738c883746049b5a136a62915aa2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 877671588}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+>>>>>>> Stashed changes
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feaa738c883746049b5a136a62915aa2, type: 3}
 --- !u!224 &1189979616 stripped
@@ -3044,7 +3118,11 @@ PrefabInstance:
     - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: bossHealthUI
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 2030619741}
+=======
+      objectReference: {fileID: 561006147}
+>>>>>>> Stashed changes
     - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: minSpawnInterval
       value: 10
@@ -3184,10 +3262,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 786993566291015897, guid: ed7310448c59f09489c5883ef9582f6e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 689283480}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed7310448c59f09489c5883ef9582f6e, type: 3}
 --- !u!1001 &1377232547740587225
 PrefabInstance:
