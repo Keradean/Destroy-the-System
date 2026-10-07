@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060777249449157324}
   - component: {fileID: 1636712083371703048}
+  - component: {fileID: 8078946655965299817}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786993566291015897}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,8 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ab31665edc5a2dd8814e03ffb3477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.GameManager
-  _maxAlarm: 15
-  _alarmPerSecond: 1
+  _maxAlarm: 90
+  _alarmPerSecond: 0.22
   _alarmPerNode: 8.33
   _hacksForCore: 3
   _endNode: {fileID: 0}
+--- !u!114 &8078946655965299817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786993566291015897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b7c61701e71d6459872858151baf23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Game.LevelLoader
+  _gameManager: {fileID: 0}
+  _nextSceneName: Level_2
+  _lastLevelSceneName: 
+  _autoLoad: 0
+  _winDelay: 3
+  _loseDelay: 3
