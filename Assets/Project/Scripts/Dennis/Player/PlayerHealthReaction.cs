@@ -55,11 +55,13 @@ namespace Project.Scripts.Dennis.Player
             bool tookDamage = current < _lastHealth;
             _lastHealth = current;
 
-            if (tookDamage && !_health.IsDead)
-            {
-                _animator.SetTrigger(DamageHash);
-                if (_audioChannel != null) _audioChannel.RaiseSFX(_damageSound, transform.position);
-            }
+            if (!tookDamage || _health.IsDead) return;
+
+            if (_audioChannel != null) _audioChannel.RaiseSFX(_damageSound, transform.position);
+
+            // Treffer-Animation würde den Angriff vor dem Schuss-Frame abbrechen, deshalb nur ohne laufenden Angriff
+            if (_attack.IsAttacking) return;
+            _animator.SetTrigger(DamageHash);
         }
 
         private void HandleDeath()
