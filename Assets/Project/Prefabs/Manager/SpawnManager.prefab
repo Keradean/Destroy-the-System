@@ -63,5 +63,5 @@ MonoBehaviour:
   bossEnemyData: {fileID: 11400000, guid: b7e1f4f0cb300e243b7fdd449bc107b2, type: 2}
   bossSpawnPoint: {fileID: 651133754127192923}
   bossHealthUI: {fileID: 0}
-  baseSpawnInterval: 10
-  minSpawnInterval: 10
+  baseSpawnInterval: 5
+  minSpawnInterval: 2

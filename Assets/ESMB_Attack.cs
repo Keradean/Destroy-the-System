@@ -24,7 +24,7 @@ public class ESMB_Attack : EnemySMBase
 
     public override void OnAnimationEvent(string eventName)
     {
-        if (eventName == "AE_OnHitFrame" || eventName == "AE_OnScanSweep")
+        if (eventName == "AE_OnHitFrame")
         {
             if (Controller == null || Controller.Attack == null) return; // Dennis
             Controller.Attack.TryHitTarget(Controller.Target, Controller.Stats.MeleeRange, Controller.Stats.AttackDamage);

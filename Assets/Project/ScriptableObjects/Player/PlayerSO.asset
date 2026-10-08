@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerDataSO
   maxHealth: 200
   moveSpeed: 6.5
-  attackInterval: 3
+  attackInterval: 1.5
   attackSpeed: 3
   attackRange: 5
-  projectileDamage: 25
+  projectileDamage: 15
   projectileCount: 1
   projectileBounces: 0
   pickupRange: 3

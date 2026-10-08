@@ -9,7 +9,9 @@ public class SpawnManager : MonoBehaviour
     {
         public string name;
         public EnemyDataSO enemyData;
-        [Range(1, 100)] public int baseWeight;
+        [Range(1, 100)]
+        [Tooltip("Probabilty to spawn an entity depends on this value / the sum of all that can spawn at any given threat level.")]
+        public int baseWeight;
         [Range(0f, 1f)] public float minAlarmPercent;
     }
 
@@ -64,7 +66,6 @@ public class SpawnManager : MonoBehaviour
         if (enemySpawners.Count == 0 || enemyPool.Count == 0) return;
         float alarmPercent = gameManager.MaxAlarm > 0 ? gameManager.Alarm / gameManager.MaxAlarm : 0f;
         List<EnemySpawnConfiguration> validConfigs = new();
-        Debug.Log($"[SpawnManager] Current Alarm %: {alarmPercent:P0} | Valid Configs: {validConfigs.Count}/{enemyPool.Count}");
         int totalWeight = 0;
 
         foreach (var config in enemyPool)
@@ -76,6 +77,7 @@ public class SpawnManager : MonoBehaviour
                 totalWeight += config.baseWeight;
             }
         }
+        Debug.Log($"[SpawnManager] Current Alarm %: {alarmPercent:P0} | Valid Configs: {validConfigs.Count}/{enemyPool.Count}");
 
         if (validConfigs.Count == 0 || totalWeight <= 0) return;
         int roll = Random.Range(0, totalWeight);

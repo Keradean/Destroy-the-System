@@ -20,6 +20,7 @@ public class EnemyControllerBase : MonoBehaviour
     public RuntimeEnemyStats Stats { get; private set; }
     public HealthComponent Health { get; private set; }
     public Transform Target { get; private set; }
+    public Transform TargetPoint { get; private set; }
     public LayerMask TargetLayer { get; private set; }
     public PoolManager PoolManager { get; private set; }
     public FXBridge FXBridge { get; private set; }
@@ -127,7 +128,7 @@ public class EnemyControllerBase : MonoBehaviour
     {
         Vector3 lookDir = Vector3.zero;
         if (Agent != null && Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f) lookDir = Agent.velocity.normalized;
-        else if (Target != null) lookDir = (Target.position - transform.position).normalized;
+        else if (Target != null) lookDir = (TargetPoint.position - transform.position).normalized;
         lookDir.y = 0;
         if (lookDir != Vector3.zero)
         {
@@ -150,8 +151,12 @@ public class EnemyControllerBase : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         if (player == null) return; // Dennis
-        Target = player.transform;
-        TargetLayer = 1 << player.layer; // Dennis
+        if (player != null)
+        {
+            Target = player.transform;
+            TargetLayer = 1 << player.layer; // Dennis
+            TargetPoint = player.transform.Find("TargetPoint");
+        }
     }
     private void HandleDeath()
     {
