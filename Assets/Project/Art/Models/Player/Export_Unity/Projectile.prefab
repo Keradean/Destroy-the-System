@@ -62,6 +62,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f517ca3d3b29dc41858229246b32610, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2171236246761070434}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f517ca3d3b29dc41858229246b32610, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3222085256767469731}
   m_SourcePrefab: {fileID: 100100000, guid: 6f517ca3d3b29dc41858229246b32610, type: 3}
 --- !u!1 &7499574660123265241 stripped
 GameObject:
@@ -107,3 +110,30 @@ MonoBehaviour:
   _maxLifetime: 3
   _audioChannel: {fileID: 0}
   _hitSound: {fileID: 0}
+--- !u!114 &3222085256767469731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499574660123265241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbd5bcf0a4ea3b4690d7f2ed2fc1c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXBridge
+  fxBindings:
+  - eventName: AE_OnImpactStartFrame
+    type: 0
+    particle: {fileID: 0}
+    targetObject: {fileID: 0}
+    audioSource: {fileID: 0}
+    particleAction: 0
+    toggleState: 0
+  - eventName: AE_OnImpactEndFrame
+    type: 0
+    particle: {fileID: 0}
+    targetObject: {fileID: 0}
+    audioSource: {fileID: 0}
+    particleAction: 0
+    toggleState: 0

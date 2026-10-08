@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Administrator
   type: 3
   prefab: {fileID: 2921150542361447948, guid: 3b9116d9aaebbb84290556a2f27767ef, type: 3}
-  xp: 50
+  xp: 100
   baseHealth: 225
   baseDamage: 5
   meleeRange: 0

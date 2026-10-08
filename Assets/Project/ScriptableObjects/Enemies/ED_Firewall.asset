@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Firewall
   type: 2
   prefab: {fileID: 6765117478192246379, guid: 296a1a4af24ccaf4fbd28ca22558d5a1, type: 3}
-  xp: 20
+  xp: 50
   baseHealth: 40
   baseDamage: 0
   meleeRange: 5
