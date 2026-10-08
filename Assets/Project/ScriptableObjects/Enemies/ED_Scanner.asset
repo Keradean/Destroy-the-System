@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 0
   prefab: {fileID: 4289308067542860465, guid: 27901be70e5c2944ea95e9b40ef72795, type: 3}
   xp: 10
-  baseHealth: 10
+  baseHealth: 5
   baseDamage: 1
   meleeRange: 2
   rangedRange: 0

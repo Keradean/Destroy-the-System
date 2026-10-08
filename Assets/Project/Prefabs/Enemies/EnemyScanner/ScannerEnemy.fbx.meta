@@ -151,7 +151,7 @@ ModelImporter:
       takeName: ScannerEnemy
       internalID: -814125921851511521
       firstFrame: 221
-      lastFrame: 320
+      lastFrame: 281
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -178,7 +178,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.33243325
+      - time: 0.32960823
         functionName: AE_OnHitFrame
         data: 
         objectReferenceParameter: {instanceID: 0}

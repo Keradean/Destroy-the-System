@@ -12,9 +12,9 @@ public class ESMB_Shooting : EnemySMBase
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Controller == null || Controller.Target == null) return;
+        if (Controller == null || Controller.TargetPoint == null) return;
 
-        Controller.transform.LookAt(new Vector3(Controller.Target.position.x, Controller.Target.position.y, Controller.Target.position.z));
+        Controller.transform.LookAt(new Vector3(Controller.TargetPoint.position.x, Controller.TargetPoint.position.y, Controller.TargetPoint.position.z));
     }
     public override void OnAnimationEvent(string eventName)
     {
@@ -53,7 +53,7 @@ public class ESMB_Shooting : EnemySMBase
         if (Controller.PoolManager == null) return; // Dennis
 
         Vector3 spawnPos = shootingComponent.FirePoint.position;
-        Quaternion rotation = Quaternion.LookRotation(Controller.Target.position - spawnPos);
+        Quaternion rotation = Quaternion.LookRotation(Controller.TargetPoint.position - spawnPos);
         GameObject projectile = Controller.PoolManager.Spawn(shootingComponent.ProjectilePrefab, spawnPos, rotation);
         if (projectile != null && projectile.TryGetComponent<EnemyProjectile>(out var p)) // Dennis
         {

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(HealthComponent))]
 public class EnemyControllerBase : MonoBehaviour
 {
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int CanSpecialHash = Animator.StringToHash("CanSpecial");
     private static readonly int InSpecialRangeHash = Animator.StringToHash("InSpecialRange");
     private static readonly int CanAttackHash = Animator.StringToHash("CanAttack");
@@ -19,6 +20,7 @@ public class EnemyControllerBase : MonoBehaviour
     public RuntimeEnemyStats Stats { get; private set; }
     public HealthComponent Health { get; private set; }
     public Transform Target { get; private set; }
+    public Transform TargetPoint { get; private set; }
     public LayerMask TargetLayer { get; private set; }
     public PoolManager PoolManager { get; private set; }
     public FXBridge FXBridge { get; private set; }
@@ -105,6 +107,7 @@ public class EnemyControllerBase : MonoBehaviour
         RotateTowardsTarget();
         HandleLocomotiveFX();
         float distance = Vector3.Distance(transform.position, Target.position);
+        Anim.SetFloat(SpeedHash, Agent.speed);
         Anim.SetFloat(DistanceToTargetHash, distance);
         Anim.SetBool(InMeleeRangeHash, distance <= Stats.MeleeRange);
         Anim.SetBool(InRangedRangeHash, distance <= Stats.RangedRange);
@@ -125,7 +128,7 @@ public class EnemyControllerBase : MonoBehaviour
     {
         Vector3 lookDir = Vector3.zero;
         if (Agent != null && Agent.hasPath && Agent.velocity.sqrMagnitude > 0.1f) lookDir = Agent.velocity.normalized;
-        else if (Target != null) lookDir = (Target.position - transform.position).normalized;
+        else if (Target != null) lookDir = (TargetPoint.position - transform.position).normalized;
         lookDir.y = 0;
         if (lookDir != Vector3.zero)
         {
@@ -148,8 +151,12 @@ public class EnemyControllerBase : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         if (player == null) return; // Dennis
-        Target = player.transform;
-        TargetLayer = 1 << player.layer; // Dennis
+        if (player != null)
+        {
+            Target = player.transform;
+            TargetLayer = 1 << player.layer; // Dennis
+            TargetPoint = player.transform.Find("TargetPoint");
+        }
     }
     private void HandleDeath()
     {
@@ -159,7 +166,6 @@ public class EnemyControllerBase : MonoBehaviour
             if (exp.TryGetComponent(out PickupEXP expComponent)) expComponent.SetExpAmount(Stats.XP); // Dennis
         }
 
-        // Reward Player with XP
         if (PoolManager != null)
             PoolManager.Despawn(gameObject);
         else

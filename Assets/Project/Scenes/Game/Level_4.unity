@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1923039037
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 91422ddcbbc32bf26be9b235c1331d65, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a7365c56532890946ba7b4ffee8861f5, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &695201746
 MonoBehaviour:
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e93bb6d6e6d82a47c8127ff368fb5cae, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 71724e78127d25141b504c790b98c010, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &695201747
 MonoBehaviour:
@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1b1b0e6fb2bbd4679a6d679cf3157e0e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: cb1c4944ad68bbe43a3bd4388916b01f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &695201748
 MonoBehaviour:
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: db48567912c35a9d4b83691b3e53ab69, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b984625d9f04ea34783bbc315f785610, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &695201749
 MeshCollider:
@@ -3051,9 +3051,17 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5803229721199831489, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
+      propertyPath: _damageSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e76e627ebe6c14448a5a53a97217e4d, type: 2}
+    - target: {fileID: 5803229721199831489, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
       propertyPath: _gameManager
       value: 
       objectReference: {fileID: 807760220}
+    - target: {fileID: 5803229721199831489, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
+      propertyPath: _audioChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: de83d03b718e64dcfac7179d759354a0, type: 2}
     - target: {fileID: 5970297382047283413, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
       propertyPath: expBarUI
       value: 
@@ -3189,10 +3197,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1978612995948787900, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1164892367}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
 --- !u!4 &1164892362 stripped
 Transform:
@@ -3215,7 +3220,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2900233540935673917, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
   m_PrefabInstance: {fileID: 1164892361}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164892366}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70cb189382a70aa219ef2629247fc1cf, type: 3}
@@ -3226,40 +3231,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4014666193001165436, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
   m_PrefabInstance: {fileID: 1164892361}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164892366}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22282ca5a17706fa5a257a16fdf82b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Dennis.Player.PlayerSetup
---- !u!1 &1164892366 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1978612995948787900, guid: 2f6663650cf80b017b0c938099ece4b6, type: 3}
-  m_PrefabInstance: {fileID: 1164892361}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1164892367
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164892366}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.57, z: 0}
 --- !u!1 &1208114760
 GameObject:
   m_ObjectHideFlags: 0
@@ -3667,9 +3644,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 255283577}
     - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: minSpawnInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: baseSpawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: 'enemySpawners.Array.data[0]'
       value: 
       objectReference: {fileID: 303509631}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[0].baseWeight
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[1].baseWeight
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[2].baseWeight
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[1].minAlarmPercent
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[2].minAlarmPercent
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6422555642117360532, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: m_Name
       value: SpawnManager

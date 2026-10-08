@@ -429,6 +429,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1791633190}
+  - {fileID: 1697896610}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217763011
@@ -2148,6 +2149,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1342607456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1697896609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 201781079}
+    m_Modifications:
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116885409540846938, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+      propertyPath: m_Name
+      value: PostFX_Bloom
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+--- !u!4 &1697896610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1882221645471563355, guid: ba54f40c0a21c1741862163e848b76b8, type: 3}
+  m_PrefabInstance: {fileID: 1697896609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1788554347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3198444496658331867, guid: 5975046adaa5b904fb5eb2fe27ef39d1, type: 3}
@@ -2283,7 +2346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1923039037
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -2300,7 +2363,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 91422ddcbbc32bf26be9b235c1331d65, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d986e84e5fc92104085ead044e956066, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &1791633195
 MonoBehaviour:
@@ -2332,7 +2395,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e93bb6d6e6d82a47c8127ff368fb5cae, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 24fc94a013a09304caacf5ff316e5064, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &1791633196
 MonoBehaviour:
@@ -2364,7 +2427,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1b1b0e6fb2bbd4679a6d679cf3157e0e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 676ddd80da9f4fc4da6787fe21fb3596, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &1791633197
 MonoBehaviour:
@@ -2396,7 +2459,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: db48567912c35a9d4b83691b3e53ab69, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5c0f10fe41e11704cb505d21db4767f4, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1806570152 stripped
 Transform:
@@ -2518,9 +2581,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1189979619}
     - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: minSpawnInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: baseSpawnInterval
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: maxEnemiesPerWave
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: minEnemiesPerWave
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: 'enemySpawners.Array.data[0]'
       value: 
       objectReference: {fileID: 1342607457}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[1].minAlarmPercent
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[2].minAlarmPercent
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6422555642117360532, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: m_Name
       value: SpawnManager
