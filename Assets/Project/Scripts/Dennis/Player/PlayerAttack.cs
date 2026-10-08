@@ -9,6 +9,7 @@ namespace Project.Scripts.Dennis.Player
         private static readonly int AttackHash = Animator.StringToHash("Attack");
         private static readonly int AttackStateHash = Animator.StringToHash("Attack");
         private static readonly int AttackSpeedHash = Animator.StringToHash("AttackSpeed");
+        private static readonly int DamageHash = Animator.StringToHash("Damage");
 
         [Header("Angriff")]
         [SerializeField] private LayerMask _enemyLayer;
@@ -33,6 +34,8 @@ namespace Project.Scripts.Dennis.Player
         private bool _enteredAttackState;
         private float _timer;
         private int _attackCount;
+
+        public bool IsAttacking => _isAttacking;
 
         private void Awake()
         {
@@ -74,6 +77,7 @@ namespace Project.Scripts.Dennis.Player
             _timer = 0f;
             _attackCount = _data.projectileCount;
 
+            _animator.ResetTrigger(DamageHash);   // offener Treffer Trigger würde den Angriff sonst abbrechen
             _animator.SetTrigger(AttackHash);
         }
 
@@ -159,9 +163,17 @@ namespace Project.Scripts.Dennis.Player
             return nearest;
         }
 
-        private static bool IsValidTarget(Collider target)
+        // Gültig heißt: aktiv, lebt noch und in Reichweite.
+        // Die Reichweite ist wichtig wegen Pooling: ein toter Gegner kann am Levelrand neu gespawnt sein.
+        private bool IsValidTarget(Collider target)
         {
-            return target != null && target.enabled && target.gameObject.activeInHierarchy;
+            if (target == null || !target.enabled || !target.gameObject.activeInHierarchy) return false;
+
+            HealthComponent health = target.GetComponentInParent<HealthComponent>();
+            if (health != null && health.IsDead) return false;
+
+            float maxDistance = _data.attackRange * 1.2f;   // etwas Spielraum, falls das Ziel kurz rausläuft
+            return (target.transform.position - transform.position).sqrMagnitude <= maxDistance * maxDistance;
         }
 
         private void OnDrawGizmosSelected()
