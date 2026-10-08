@@ -54,12 +54,12 @@ MonoBehaviour:
     minAlarmPercent: 0
   - name: Tracer
     enemyData: {fileID: 11400000, guid: feb29ae506fb2414281b383d791d10e0, type: 2}
-    baseWeight: 70
+    baseWeight: 35
     minAlarmPercent: 0.15
   - name: Firewall
     enemyData: {fileID: 11400000, guid: 82331c12808a16045a770eb3edbe7d90, type: 2}
-    baseWeight: 100
-    minAlarmPercent: 0.2
+    baseWeight: 15
+    minAlarmPercent: 0.3
   bossEnemyData: {fileID: 11400000, guid: b7e1f4f0cb300e243b7fdd449bc107b2, type: 2}
   bossSpawnPoint: {fileID: 651133754127192923}
   bossHealthUI: {fileID: 0}

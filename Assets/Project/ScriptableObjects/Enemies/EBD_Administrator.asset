@@ -19,7 +19,7 @@ MonoBehaviour:
   baseHealth: 100
   baseDamage: 2
   meleeRange: 0
-  rangedRange: 18
+  rangedRange: 10
   attackCooldown: 4
   hasSpecial: 1
   specialRange: 80

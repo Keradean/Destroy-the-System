@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(HealthComponent))]
 public class EnemyControllerBase : MonoBehaviour
 {
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int CanSpecialHash = Animator.StringToHash("CanSpecial");
     private static readonly int InSpecialRangeHash = Animator.StringToHash("InSpecialRange");
     private static readonly int CanAttackHash = Animator.StringToHash("CanAttack");
@@ -105,6 +106,7 @@ public class EnemyControllerBase : MonoBehaviour
         RotateTowardsTarget();
         HandleLocomotiveFX();
         float distance = Vector3.Distance(transform.position, Target.position);
+        Anim.SetFloat(SpeedHash, Agent.speed);
         Anim.SetFloat(DistanceToTargetHash, distance);
         Anim.SetBool(InMeleeRangeHash, distance <= Stats.MeleeRange);
         Anim.SetBool(InRangedRangeHash, distance <= Stats.RangedRange);
@@ -159,7 +161,6 @@ public class EnemyControllerBase : MonoBehaviour
             if (exp.TryGetComponent(out PickupEXP expComponent)) expComponent.SetExpAmount(Stats.XP); // Dennis
         }
 
-        // Reward Player with XP
         if (PoolManager != null)
             PoolManager.Despawn(gameObject);
         else
