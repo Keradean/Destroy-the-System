@@ -16,6 +16,7 @@ namespace Project.Scripts.Dennis.Player
         [SerializeField] private SoundData _hitSound;
 
         private Collider _target;
+        private HealthComponent _targetHealth;
         private float _damage;
         private PoolManager _poolManager;
         private float _lifetime;
@@ -27,7 +28,7 @@ namespace Project.Scripts.Dennis.Player
         // Wird bei jedem Schuss neu aufgerufen, weil das Projektil aus dem Pool wiederverwendet wird.
         public void Launch(Collider target, float damage, int bounces, LayerMask enemys, PoolManager poolManager)
         {
-            _target = target;
+            SetTarget(target);
             _damage = damage;
             _bounceCount = bounces;
             _enemyLayer = enemys;
@@ -45,8 +46,10 @@ namespace Project.Scripts.Dennis.Player
                 return;
             }
 
-            // Ziel tot oder deaktiviert: Projektil verschwindet
-            if (_target == null || !_target.enabled || !_target.gameObject.activeInHierarchy)
+            // Ziel tot oder deaktiviert: Projektil verschwindet.
+            // Tot prüfen ist wichtig, weil der Gegner sonst aus dem Pool woanders neu auftaucht und das Projektil hinterherfliegt.
+            if (_target == null || !_target.enabled || !_target.gameObject.activeInHierarchy
+                || (_targetHealth != null && _targetHealth.IsDead))
             {
                 ReturnToPool();
                 return;
@@ -63,10 +66,9 @@ namespace Project.Scripts.Dennis.Player
 
         private void Hit()
         {
-            HealthComponent health = _target.GetComponentInParent<HealthComponent>();
-            if (health != null)
+            if (_targetHealth != null)
             {
-                health.TakeDamage(_damage);
+                _targetHealth.TakeDamage(_damage);
             }
             if (_audioChannel != null) _audioChannel.RaiseSFX(_hitSound, transform.position);
             if (CheckForBounce()) return;
@@ -84,6 +86,8 @@ namespace Project.Scripts.Dennis.Player
                 foreach (Collider enemy in enemys)
                 {
                     if (enemy == _target) continue;   // nicht das gerade getroffene Ziel
+                    HealthComponent enemyHealth = enemy.GetComponentInParent<HealthComponent>();
+                    if (enemyHealth != null && enemyHealth.IsDead) continue;
                     float distance = Vector3.Distance(transform.position, enemy.bounds.center);
                     if (distance < nearestDistance)
                     {
@@ -93,16 +97,23 @@ namespace Project.Scripts.Dennis.Player
                 }
                 if (nearest != null)
                 {
-                    _target = nearest;
+                    SetTarget(nearest);
                     return true;
                 }
             }
             return false;
         }
 
+        private void SetTarget(Collider target)
+        {
+            _target = target;
+            _targetHealth = target != null ? target.GetComponentInParent<HealthComponent>() : null;
+        }
+
         private void ReturnToPool()
         {
             _target = null;
+            _targetHealth = null;
             _poolManager.Despawn(gameObject);
         }
     }

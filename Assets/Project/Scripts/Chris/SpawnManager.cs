@@ -55,7 +55,6 @@ public class SpawnManager : MonoBehaviour
     private void Update()
     {
         if (gameManager == null || gameManager.State != GameManager.GameState.Playing) return;
-        if (isBossSpawned) return;
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {

@@ -17,7 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 4202005733305121246, guid: 7eb8fdd912a386c4186cff416f79f213, type: 3}
   xp: 30
   baseHealth: 10
-  baseDamage: 2
+  baseDamage: 1
   meleeRange: 0
   rangedRange: 8
   attackCooldown: 2
