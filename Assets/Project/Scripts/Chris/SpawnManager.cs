@@ -28,6 +28,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private BossHealthUI bossHealthUI;
     
     [Header("Wave/Alarm Settings")]
+    [SerializeField] private int minEnemiesPerWave = 2;
+    [SerializeField] private int maxEnemiesPerWave = 8;
     [SerializeField] private float baseSpawnInterval = 8.0f;
     [SerializeField] private float minSpawnInterval = 2.0f;
     private float spawnTimer;
@@ -77,24 +79,26 @@ public class SpawnManager : MonoBehaviour
                 totalWeight += config.baseWeight;
             }
         }
-        Debug.Log($"[SpawnManager] Current Alarm %: {alarmPercent:P0} | Valid Configs: {validConfigs.Count}/{enemyPool.Count}");
-
         if (validConfigs.Count == 0 || totalWeight <= 0) return;
+        int enemiesToSpawn = Mathf.RoundToInt(Mathf.Lerp(minEnemiesPerWave, maxEnemiesPerWave, alarmPercent));
+        float stageMultiplier = 1.0f + (alarmPercent * 1.5f);
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            EnemySpawnConfiguration selectedConfig = RollEnemyConfig(validConfigs, totalWeight);
+            EnemySpawner selectedSpawner = enemySpawners[i % enemySpawners.Count];
+            selectedSpawner.SpawnEnemyAtRandomPosition(selectedConfig.enemyData, stageMultiplier);
+        }
+    }
+    private EnemySpawnConfiguration RollEnemyConfig(List<EnemySpawnConfiguration> validConfigs, int totalWeight)
+    {
         int roll = Random.Range(0, totalWeight);
         int currentSum = 0;
-        EnemySpawnConfiguration selectedConfig = validConfigs[0];
         foreach (var config in validConfigs)
         {
             currentSum += config.baseWeight;
-            if (roll < currentSum)
-            {
-                selectedConfig = config;
-                break;
-            }
+            if (roll < currentSum) return config;
         }
-        EnemySpawner selectedSpawner = enemySpawners[Random.Range(0, enemySpawners.Count)];
-        float stageMultiplier = 3.0f + (alarmPercent * 1.5f);
-        selectedSpawner.SpawnEnemyAtRandomPosition(selectedConfig.enemyData, stageMultiplier);
+        return validConfigs[0];
     }
     private void ResetTimer()
     {
