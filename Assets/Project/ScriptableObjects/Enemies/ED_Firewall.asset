@@ -18,7 +18,7 @@ MonoBehaviour:
   xp: 20
   baseHealth: 40
   baseDamage: 0
-  meleeRange: 10
+  meleeRange: 5
   rangedRange: 0
   attackCooldown: 6
   hasSpecial: 0

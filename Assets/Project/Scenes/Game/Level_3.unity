@@ -1911,6 +1911,14 @@ PrefabInstance:
       propertyPath: 'enemySpawners.Array.data[0]'
       value: 
       objectReference: {fileID: 1496714299}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[1].baseWeight
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752021839285775278, guid: 957283e488b9d004e95b93354694e565, type: 3}
+      propertyPath: enemyPool.Array.data[2].baseWeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6422555642117360532, guid: 957283e488b9d004e95b93354694e565, type: 3}
       propertyPath: m_Name
       value: SpawnManager
@@ -4205,7 +4213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1923039037
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -4222,7 +4230,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 91422ddcbbc32bf26be9b235c1331d65, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 54ff0459f5e8f1b4bb67e3651b15436a, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &2073653434
 MonoBehaviour:
@@ -4254,7 +4262,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e93bb6d6e6d82a47c8127ff368fb5cae, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2a16e9238a13dc4499b575cd46c8a482, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &2073653435
 MonoBehaviour:
@@ -4286,7 +4294,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1b1b0e6fb2bbd4679a6d679cf3157e0e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e969448a665525e48849f7c24d6149c4, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &2073653436
 MonoBehaviour:
@@ -4318,7 +4326,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: db48567912c35a9d4b83691b3e53ab69, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ba8b3a18223326a4780eba94393c160f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &2073653437
 MeshCollider:

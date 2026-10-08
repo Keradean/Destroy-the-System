@@ -16,11 +16,11 @@ MonoBehaviour:
   type: 3
   prefab: {fileID: 2921150542361447948, guid: 3b9116d9aaebbb84290556a2f27767ef, type: 3}
   xp: 50
-  baseHealth: 100
-  baseDamage: 2
+  baseHealth: 225
+  baseDamage: 5
   meleeRange: 0
-  rangedRange: 18
+  rangedRange: 10
   attackCooldown: 4
   hasSpecial: 1
-  specialRange: 80
-  specialCooldown: 20
+  specialRange: 20
+  specialCooldown: 15
