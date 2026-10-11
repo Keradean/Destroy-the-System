@@ -10,8 +10,11 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] InputActionReference pauseAction;
 
+    private static PauseManager instance; // Dennis
+
     private void Awake() // Dennis
     {
+        instance = this; // Dennis
         var ui = Project.Scripts.Dennis.UI.UIReferences.Find(); // Dennis
         if (ui == null) return; // Dennis
         if (pausePanel.Count < 2) pausePanel = new List<GameObject> { null, null }; // Dennis
@@ -50,6 +53,8 @@ public class PauseManager : MonoBehaviour
 
     public void Continue()
     {
+        if (instance != null && instance != this) { instance.Continue(); return; } // Dennis
+        if (pausePanel.Count == 0 || pausePanel[0] == null) return; // Dennis
         pausePanel[0].SetActive(false);
         SetPause();
     }
@@ -62,6 +67,7 @@ public class PauseManager : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext context)
     {
+        if (pausePanel.Count == 0 || pausePanel[0] == null) return; // Dennis
         pausePanel[0].SetActive(!pausePanel[0].activeSelf);
         SetPause();
     }
