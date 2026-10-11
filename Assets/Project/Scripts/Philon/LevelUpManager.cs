@@ -20,6 +20,16 @@ namespace Project.Scripts.Philon.Levelup
 
         private int[] currentOptions = new int[3];
 
+        private void Awake() // Dennis
+        {
+            var ui = Project.Scripts.Dennis.UI.UIReferences.Find(); // Dennis
+            if (ui == null) return; // Dennis
+            if (LevelUpScreen == null) LevelUpScreen = ui.LevelUpScreen; // Dennis
+            if (currentImages == null || currentImages.Length != 3) currentImages = new Image[3]; // Dennis
+            for (int i = 0; i < currentImages.Length; i++) // Dennis
+                if (currentImages[i] == null && i < ui.LevelUpOptions.Length) currentImages[i] = ui.LevelUpOptions[i]; // Dennis
+        }
+
         private void Start()
         {
             if(attack == null) attack = movement.GetComponent<PlayerAttack>();

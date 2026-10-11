@@ -10,6 +10,15 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] InputActionReference pauseAction;
 
+    private void Awake() // Dennis
+    {
+        var ui = Project.Scripts.Dennis.UI.UIReferences.Find(); // Dennis
+        if (ui == null) return; // Dennis
+        if (pausePanel.Count < 2) pausePanel = new List<GameObject> { null, null }; // Dennis
+        if (pausePanel[0] == null) pausePanel[0] = ui.PauseMenu; // Dennis
+        if (pausePanel[1] == null) pausePanel[1] = ui.LevelUpScreen; // Dennis
+    }
+
     private void OnEnable()
     {
         pauseAction.action.Enable();
@@ -29,7 +38,7 @@ public class PauseManager : MonoBehaviour
         bool pause = false;
         foreach (var panel in pausePanel)
         {
-            if (panel.activeSelf)
+            if (panel != null && panel.activeSelf) // Dennis
             {
                 pause = true;
                 break;

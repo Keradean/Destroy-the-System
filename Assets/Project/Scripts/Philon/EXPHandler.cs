@@ -13,6 +13,13 @@ public class EXPHandler : MonoBehaviour
 
     [SerializeField] SphereCollider pickUpColl;
 
+    private void Awake() // Dennis
+    {
+        if (expBarUI != null) return; // Dennis
+        var ui = Project.Scripts.Dennis.UI.UIReferences.Find(); // Dennis
+        if (ui != null) expBarUI = ui.ExpBarUI; // Dennis
+    }
+
     public void AddExp(float amount)
     {
         currentExp += amount;

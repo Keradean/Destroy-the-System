@@ -120,8 +120,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelUpManager, Assembly-CSharp
+      - m_Target: {fileID: 5519608074931096367, guid: dbdd6e8222f4e3a43a9a7ae260a99810, type: 3}
+        m_TargetAssemblyTypeName: Project.Scripts.Philon.Levelup.LevelUpManager, Assembly-CSharp
         m_MethodName: SelectUpgrade
         m_Mode: 3
         m_Arguments:
@@ -252,8 +252,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelUpManager, Assembly-CSharp
+      - m_Target: {fileID: 5519608074931096367, guid: dbdd6e8222f4e3a43a9a7ae260a99810, type: 3}
+        m_TargetAssemblyTypeName: Project.Scripts.Philon.Levelup.LevelUpManager, Assembly-CSharp
         m_MethodName: SelectUpgrade
         m_Mode: 3
         m_Arguments:
@@ -485,8 +485,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelUpManager, Assembly-CSharp
+      - m_Target: {fileID: 5519608074931096367, guid: dbdd6e8222f4e3a43a9a7ae260a99810, type: 3}
+        m_TargetAssemblyTypeName: Project.Scripts.Philon.Levelup.LevelUpManager, Assembly-CSharp
         m_MethodName: SelectUpgrade
         m_Mode: 3
         m_Arguments:
