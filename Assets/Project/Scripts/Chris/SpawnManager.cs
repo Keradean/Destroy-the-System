@@ -38,6 +38,7 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         if (gameManager == null) gameManager = FindAnyObjectByType<GameManager>();
+        if (bossHealthUI == null) bossHealthUI = Project.Scripts.Dennis.UI.UIReferences.Find()?.BossHealthUI; // Dennis
     }
     private void OnEnable()
     {
