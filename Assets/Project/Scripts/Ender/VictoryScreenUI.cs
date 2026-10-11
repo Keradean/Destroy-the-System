@@ -83,7 +83,7 @@ public class VictoryScreenUI : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuSceneName); // Dennis
     }
 
     [ContextMenu("Test: Show Victory Screen")]
